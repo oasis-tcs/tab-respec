@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<meta charset='utf-8' />
+<head>
+<title>OSLC &lt;name of spec&gt; v1.0</title>
+<link rel="stylesheet" type="text/css" href="../../styles/oslc-ccm-styles.css" />
+<link rel="stylesheet" type="text/css" href="../../styles/table-styles.css" />
+<link rel="stylesheet" type="text/css" href="../../styles/definition-styles.css" />
+<script src='https://ndjc.github.io/respec/builds/oasis/respec-oasis-common.js' async class='remove'></script>
+<script class='remove'>
+	var respecConfig = {
+	   	// specification status (ED, CSD, CSPRD, CS, COS, OS, Errata, CND, CNPRD, CN).
+		// If in doubt use ED.
+		// See http://docs.oasis-open.org/specGuidelines/ndr/namingDirectives.html#stage
+		specStatus : "ED",
+
+        // the specification's short name with version but no dots
+        shortName : "oslc-xxx-10",
+
+        // if your specification has a subtitle that goes below the main
+        // formal title, define it here
+        // subtitle   :  "Committee Specification Draft 01",
+
+        // the document's citation label
+        citationLabel: "OSLC-XXX-v1.0",
+
+        // Revision level of the document within its stage
+        revision: "01",
+
+        // if you wish the publication date to be other than the last modification, set this
+        // publishDate:  "2009-08-06",
+
+        // if the specification's copyright date is a range of years, specify the start date here:
+        // copyrightStart: "2005"
+
+        // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
+        // and its maturity status
+        // previousPublishDate:  "1977-03-15",
+        // previousMaturity:  "WD",
+
+        // Only include h1 and h2 levels in the table of contents
+        maxTocLevel: 2,
+
+		// if there a publicly available Editor's Draft, this is the link
+		edDraftURI:           "http://ndjc.github.io/respec/examples/oasis-oslc/template-spec.html",
+
+        // Chairs and editors, add as many as you like: you must have at least one editor.
+        // Only "name" is required, but the other fields are recommended.
+        editors:  [ {
+            name:        "Editor Name",
+            url :        "http://example.org",
+            mailto :     "you@example.org",
+            company :    "Your Company",
+            companyURL : "http://example.com/"
+          },
+        ],
+		chairs : [ {
+			name :       "Chair Name",
+			url :        "http://example.org",
+			mailto :     "you@example.org",
+			company :    "Your Company",
+			companyURL : "http://example.com/"
+          },
+        ],
+
+		// name of the TC
+		wg : "Committee Name",
+        wgShortName:  "oslc-xxx",
+
+		// URI of the public TC page
+		wgURI : "https://www.oasis-open.org/apps/org/workgroup/oslc-xxx/",
+
+        // name (without the @lists.oasis-open.org) of the public mailing to which comments are due
+        wgPublicList: "oslc-xxx-comments",
+
+		// Namespaces defined by this TC
+		namespaces : [ { href: "http://open-services.net/ns/xxx#", prefix: "oslc-xxx" } ],
+
+        // For multi-part specifications, each part must list the other parts
+        // additionalArtifacts : [
+        //  { title: "OSLC XXX 1.0 Part 1: Overview (this document)", href: "oslc-xxx.html" },
+        //  { title: "OSLC XXX 1.0 Part 2: XXX2", href: "xxx-part2.html" },
+        //  { title: "OSLC XXX 1.0 Part 3: XXX3", href: "xxx-part3.html" },
+        // ],
+
+        // Related work
+        // relatedWork : [
+        //    { title: "Some title", href: "http://example.com/relatedDocument.html" },
+        //    ],
+        // supersedes : [
+        //    { title: "Some title", href: "http://example.com/supercededDocument.html" },
+        //    ],
+
+        localBiblio : {
+            "OSLCCore2": {
+                title:     "OSLC Core 2.0",
+                href:      "http://open-services.net/bin/view/Main/OslcCoreSpecification",
+                authors:   ["S. Speicher", "D. Johnson"],
+                status:    "Finalized",
+                publisher: "http://open-services.net"
+            },
+            "OSLCCore3": {
+                title:     "OSLC Core 3.0",
+                href:      "http://tools.oasis-open.org/version-control/svn/oslc-core/specs/oslc-core-v3.html",
+                authors:   [ "Steve Speicher", "Jim Amsden" ],
+                publisher: "OASIS",
+            },
+        },
+    };
+</script>
+</head>
+<body>
+<section id='abstract'>
+  <p>This is the <em>abstract</em> for your specification.
+    It should be fairly short...a couple of sentences.</p>
+</section>
+<section id='toc'></section>
+<hr />
+<section id='sotd'></section>
+<section id='intro' class='informative'>
+  <h2>Introduction</h2>
+  <p><em>A simple introduction. It would be good if the reader ended the
+    introduction knowing what the spec does, ideally including a simple key example.</em></p>
+<section id='conventions'></section>
+<section class='informative'>
+  <h2>Motivation</h2>
+  <p><em>Call out some key problems, use cases, scenarios that have
+    motivated this specification. References are good, especially to
+    some Use Cases and Requirements.</em></p>
+</section>
+<section id='terminology' class='informative'>
+  <h3>Terminology</h3>
+  <p>Terminology is based on OSLC Core Overview [[OSLCCore3]],
+    W3C Linked Data Platform [[LDP]],
+    W3C's Architecture of the World Wide Web [[WEBARCH]],
+    and Hyper-text Transfer Protocol [[HTTP11]].</p>
+  <dl class="spaced">
+    <dt><dfn>Term</dfn></dt>
+    <dd>Defined of term. Simple one liners are better than full paragraphs.
+      Save elaboration for the spec body.</dd>
+  </dl>
+</section>
+<section id='concepts' class='informative'>
+  <h2>Basic Concepts</h2>
+  <p><em>Optional section, though could be useful if intro can't cover it
+    and you have enough concepts that it is worth elaborating on.
+    A reasonable example is the <a href="http://www.w3.org/TR/json-ld/#basic-concepts">JSON-LD Syntax spec</a>.</em></p>
+</section>
+<section id='references'>
+  <!-- Note that the header levels you use do not really matter - ReSpec will fix them to match the section nesting -->
+  <h3>References</h3>
+</section>
+</section>
+<section id='namespaces'>
+  <h2>RDF Namespaces</h2>
+  <p><em>Describe here any RDF namespaces defined by this standard, and their recommended prefixes.
+    Also describe any other RDF namespace prefixes used in examples.</em></p>
+</section>
+<section id='conformance'>
+  <h2>Conformance</h2>
+  <section id='conformance-other'>
+    <h3>Conformance to other standards</h3>
+    <p>OSLC XXX servers MUST conform to [[!OSLCCore2]], and SHOULD conform to [[!OSLCCore3]] (and hence [[!LDP]]).</p>
+    <p><em>Add here any requirements for conformance to other standards.</em></p>
+  </section>
+  <section id='conformance-clauses'>
+    <h3>Conformance Clauses</h3>
+    <p>The following table summarizes the conformance requirements for OSLC XXX.</p>
+    <!-- ReSpec will insert a conformance clause table here -->
+    </section>
+</section>
+<section>
+  <h2>Capability</h2>
+  <p><em>The title of this section is flexible.  Since the title of this spec should match what it does, it
+    may not make sense to repeat it here.  This section is intended to capture the conformance clauses
+    (ie, the 'meat' of the spec).</em></p>
+  <section id="clause">
+    <h2>Clause section</h2>
+    <p><em>Give your section title/id something meaningful and simple, don't include the actual section number.</em></p>
+    <p><em><strong>Writing conformance clauses/statements: </strong> Create individual sections for each conformance clause.
+      Each clause should cleanly map to a test case, see [[LDP]] spec and <a href="http://w3c.github.io/ldp-testsuite">LDP testsuite</a> for an example of this model.</em></p>
+    <section id="clausea">
+      <p class="conformance" strength="MUST, SHOULD" title="Use appropriate [[RFC2116]] keywords">OSLC specifications MUST provide [[RFC2116]] keywords that SHOULD be in ALL CAPS and MAY include client and/or server needs.</p>
+    </section>
+    <section id="clauseb">
+      <p class="conformance" strength="Recommended">It is RECOMMENDED that OSLC specifications include examples whenever possible.</p>
+    </section>
+  </section>
+  <section>
+    <h2>Shape</h2>
+    <p><em>For every resource that is defined, define a shape for it.
+      You may have additional shapes for certain scenarios.
+      Shapes are published separately as Turtle files;
+      you may have one shape per Turtle source file, or put several related shapes in one file;
+      either way, you must have one data-include for each shape, using the right anchor URL.</em></p>
+    <div title='RDF Shape for Example1'
+				data-include='./template-spec-shapes.ttl#ExampleShape1'
+				data-oninclude='shapeToSpec'
+				data-include-sync='true'
+				data-include-replace='true'
+				data-include-format='html'></div>
+  </section>
+  <section>
+    <h2>Shape2</h2>
+    <p><em>Like first shape, included in same file, reusing some property definitions.</em></p>
+    <div title='RDF Shape for Example2'
+				data-include='./template-spec-shapes.ttl#ExampleShape2'
+				data-oninclude='shapeToSpec'
+				data-include-sync='true'
+				data-include-replace='true'
+				data-include-format='html'></div>
+  </section>
+  <section>
+    <h2>Discovery</h2>
+    <p><em>This section details how OSLC clients can discover this capability.  It should follow the model
+      set by [[LDP]] and [[OSLCCore3]].  Depending on the capability, it could be defined using existing
+      HTTP headers, HTTP OPTIONS response, content in responses such as a predicate that links a ldp:Container
+      to some other kinds of resource (such as type URL or shape), and so on.</em></p>
+  </section>
+</section>
+<section class='appendix'>
+  <h2>RDF Vocabulary</h2>
+  <p><em>Each specification may define new vocabulary terms.
+    These should be defined with consideration for global use (not within a specific type of resource).
+    Other domains and resource types will be encouraged to reuse these.</em></p>
+  <div title='RDF Vocabulary for Template'
+	data-include='./template-spec-vocab.ttl'
+	data-oninclude='vocabToSpec'
+	data-include-sync='true'
+	data-include-replace='true'
+	data-include-format='html'></div>
+</section>
+<section class='appendix informative'>
+  <h2>Acknowledgements</h2>
+  <p><em>Call all key contributors, reviewers or general groups as needed.</em></p>
+  <p>Many thanks to Tim Berners-Lee for inventing the Web.</p>
+</section>
+<section class='appendix informative'>
+  <h2>Change History</h2>
+  <p>The change history is up to the editors to insert a brief summary of
+    changes, ordered by most recent changes first and with heading from which
+    public draft it has been changed from.</p>
+</section>
+</body>
+</html>

@@ -13,7 +13,6 @@ ReSpec is not endorsed by W3C or OASIS, and nobody should expect the W3C Webmast
 to provide advice on problems encountered with ReSpec,
 or on why it may be failing to produce compliant content.
 
-
 Want to see complete documentation?
 ===================================
 
@@ -45,10 +44,6 @@ If you're not familiar with GitHub, you need to follow the following steps:
   the resulting repository, make the changes there, and push it back. Then click the "Pull Request"
   button. This allows you to request that the project integrate your changes. Those should normally
   get processed relatively fast (depending on how complex they are).
-
-
-## Building ReSpec
-
 
 ## Releasing ReSpec
 

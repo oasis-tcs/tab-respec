@@ -22,8 +22,8 @@ define([
         ,   "override-configuration"
         ,   "default-root-attr"
         ,   "markdown"
-        ,   "style"
-        ,   "style"
+        ,   "core-style"
+        ,   "oasis-style"
         ,   "headers"
 /*      ,   "abstract" */
         ,   "conventions"
