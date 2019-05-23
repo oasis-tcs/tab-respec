@@ -1,0 +1,39 @@
+{{#if typeURI}}
+<ul>
+<li><strong>Name:</strong> <code>{{name}}</code></li>
+<li><strong>Type URI: </strong> <code>{{typeURI}}</code></li>
+<li><strong>Summary:</strong> {{{title}}}</li>
+{{#if description}}<li><strong>Description:</strong> {{{description}}}</li>{{/if}}
+</ul>
+{{else}}
+<p>{{{title}}}</p>
+{{#if description}}<p>{{{description}}}</p>{{/if}}
+{{/if}}
+
+{{#if name}}<b>{{name}} Properties</b>{{/if}}
+
+<table class="simple">
+<thead>
+<tr>
+  <th><em>Prefixed Name</em></th>
+  <th><em>Occurs</em></th>
+  <th><em>Read-only</em></th>
+  <th><em>Value-type</em></th>
+  <th><em>Representation</em></th>
+  <th><em>Range</em></th>
+  <th><em>Description</em></th>
+</tr>
+</thead>
+<tbody>
+{{#each props}}
+<tr>
+  <td><code>{{prefixedName}}</code></td>
+  <td>{{occurs}}</td>
+  <td>{{readOnly}}</td>
+  <td>{{valType}}</td>
+  <td>{{rep}}</td>
+  <td>{{#eachRange range}}<code>{{this}}</code>{{/eachRange}}</td>
+  <td>{{{description}}}</td>
+</tr>
+{{/each}}
+</table>

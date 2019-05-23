@@ -1,0 +1,93 @@
+<section>
+<h2>Vocabulary Details</h2>
+<p>The namespace URI for this vocabulary is:
+<code>{{vocabURI}}</code></p>
+<p>{{description}}</p>
+{{#if seeAlso}}<strong>See Also:</strong><ul>{{/if}}
+  {{#each seeAlso}}
+    {{#if object}}<li><a href="{{object}}">{{object}}</a></li>{{/if}}
+  {{/each}}
+{{#if seeAlso}}</ul>{{/if}}
+
+{{#if classes}}
+<section><h2>RDFS Classes in this namespace</h2>
+<p>{{#eachRange classes}}<a href="#{{name}}">{{name}}</a>{{/eachRange}}</p>
+</section>
+{{/if}}
+
+{{#if props}}
+<section><h2>RDF Properties in this namespace</h2>
+<p>{{#eachRange props}}<a href="#{{name}}">{{name}}</a>{{/eachRange}}</p>
+</section>
+{{/if}}
+
+{{#if desc}}
+<section><h2>RDF Descriptions(Individuals) in this namespace</h2>
+<p>{{#eachRange desc}}<a href="#{{name}}">{{name}}</a>{{/eachRange}}</p>
+</section>
+{{/if}}
+
+
+{{#each classes}}
+<section>
+{{#if archaic}}
+<div class="archaic">
+<h2 class="TML" id="{{name}}">{{name}} <i style="font-size:75%;">(Archaic term)</i></h2>
+{{else}}
+<h2 class="TML" id="{{name}}">{{name}}</h2>
+{{/if}}
+<p><verbatim>{{subject}}</verbatim></p>
+<p><em>{{name}}</em> is an RDFS class.</p>
+<p>{{comment}}</p>
+{{#if seeAlso}}
+<strong>See Also:</strong>
+<ul>
+{{#each seeAlso}}<li><a href="{{object}}">{{object}}</a></li>{{/each}}
+</ul>
+{{/if}}
+{{#if archaic}}
+</div>
+{{/if}}
+</section>
+{{/each}}
+
+{{#each props}}
+<section>
+{{#if archaic}}
+<div class="archaic">
+<h2 class="TML" id="{{name}}">{{name}} <i style="font-size:75%;">(Archaic term)</i></h2>
+{{else}}
+<h2 class="TML" id="{{name}}">{{name}}</h2>
+{{/if}}
+<p><verbatim>{{subject}}</verbatim></p>
+<p><em>{{name}}</em> is an RDF property.</p>
+<p>{{comment}}</p>
+{{#if seeAlso}}
+<strong>See Also:</strong>
+<ul>
+{{#each seeAlso}}<li><a href="{{object}}">{{object}}</a></li>{{/each}}
+</ul>
+{{/if}}
+{{#if archaic}}
+</div>
+{{/if}}
+</section>
+{{/each}}
+
+
+{{#each desc}}
+<section>
+<h2 class="TML" id="{{name}}">{{name}}</h2>
+<p><verbatim>{{subject}}</verbatim></p>
+<p><em>{{name}}</em> is an RDF description.</p>
+<p>{{comment}}</p>
+{{#if seeAlso}}
+<strong>See Also:</strong>
+<ul>
+{{#each seeAlso}}<li><a href="{{object}}">{{object}}</a></li>{{/each}}
+</ul>
+{{/if}}
+</section>
+{{/each}}
+
+</section>
