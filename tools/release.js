@@ -15,11 +15,11 @@ var prompt = require("prompt")
 
 prompt.start();
 
-// 1. Make sure you are up to date and on the feature/oasis-style branch (git up; git checkout feature/oasis-style)
+// 1. Make sure you are up to date and on the master branch (git up; git checkout master)
 function upToDateAndDev (cb) {
     prompt.get(
         {
-            description:    "Are you up to date and on branch feature/oasis-style"
+            description:    "Are you up to date and on the master branch?"
         ,   pattern:        /^[yn]$/i
         ,   message:        "Values can be 'y' or 'n'."
         ,   default:        "y"
@@ -27,7 +27,7 @@ function upToDateAndDev (cb) {
     ,   function (err, res) {
             var val = res.question.toLowerCase();
             if (err) return cb(err);
-            if (val === "n") return cb("Make sure to run git up; git checkout feature/oasis-style");
+            if (val === "n") return cb("Make sure to run git up; git checkout master");
             cb();
         }
     );
@@ -67,12 +67,11 @@ function bumpVersion (cb) {
 //    issue).
 // 4. Add the new build (git add builds/respec-oasis-common-3.x.y.js).
 // 5. Commit your changes (git commit -am v0.0.9)
-// 6. Merge to gh-pages (git checkout gh-pages; git merge feature/oasis-style)
 // 7. Tag the release (git tag v3.x.y) and be sure that git is pushing tags.
-function buildAddCommitMergeTag (cb) {
+function buildAddCommitTag (cb) {
     prompt.get(
         {
-            description:    "Are you ready to build, add, commit, merge, and tag"
+            description:    "Are you ready to build, add, commit, and tag"
         ,   pattern:        /^[yn]$/i
         ,   message:        "Values can be 'y' or 'n'."
         ,   default:        "y"
@@ -80,7 +79,7 @@ function buildAddCommitMergeTag (cb) {
     ,   function (err, res) {
             var val = res.question.toLowerCase();
             if (err) return cb(err);
-            if (val === "n") return cb("User not ready! ABORT, ABORT!");
+            if (val === "n") return cb("User not ready!");
             cb();
         }
     );
@@ -92,7 +91,7 @@ function build (cb) {
 }
 
 function add (cb) {
-    var path = rel("../../builds/respec-oasis-common-" + targetVersion + ".js");
+    var path = rel("../builds/respec-oasis-common-" + targetVersion + ".js");
     console.log("About to add "+path);
     exec("git add " + path, cb);
 }
@@ -100,21 +99,6 @@ function add (cb) {
 function commit (cb) {
     console.log("About to commit ");
     exec("git commit -am v" + targetVersion, cb);
-}
-
-function checkoutGHPages (cb) {
-    console.log("Switching to gh-pages branch");
-    exec("git checkout gh-pages", cb);
-}
-
-function merge (cb) {
-    console.log("About to merge");
-    exec("git merge feature/oasis-style", cb);
-}
-
-function checkoutDevelop (cb) {
-    console.log("Switching back to feature/oasis-style");
-    exec("git checkout feature/oasis-style", cb);
 }
 
 function tag (cb) {
@@ -136,8 +120,7 @@ function tag (cb) {
     );
 }
 
-// 8. Push everything back to the server (make sure you are pushing at least the `feature/oasis-style` and
-//    `gh-pages` branches).
+// 8. Push everything back to the server (make sure you are pushing the master branch).
 function pushAll (cb) {
     prompt.get(
         {
@@ -149,7 +132,7 @@ function pushAll (cb) {
     ,   function (err, res) {
             var val = res.question.toLowerCase();
             if (err) return cb(err);
-            if (val === "n") return cb("User not ready! ABORT, ABORT!");
+            if (val === "n") return cb("User not ready!");
             cb();
         }
     );
@@ -168,13 +151,10 @@ function pushTags (cb) {
 async.series([
         upToDateAndDev
     ,   bumpVersion
-    ,   buildAddCommitMergeTag
+    ,   buildAddCommitTag
     ,   build
     ,   add
     ,   commit
-    ,   checkoutGHPages
-    ,   merge
-    ,   checkoutDevelop
     ,   tag
     ,   pushAll
     ,   pushCommits

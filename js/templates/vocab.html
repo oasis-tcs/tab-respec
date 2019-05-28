@@ -21,9 +21,9 @@
 </section>
 {{/if}}
 
-{{#if desc}}
-<section><h2>RDF Descriptions(Individuals) in this namespace</h2>
-<p>{{#eachRange desc}}<a href="#{{name}}">{{name}}</a>{{/eachRange}}</p>
+{{#if resources}}
+<section><h2>RDF Resources (Individuals) in this namespace</h2>
+<p>{{#eachRange resources}}<a href="#{{name}}">{{name}}</a>{{/eachRange}}</p>
 </section>
 {{/if}}
 
@@ -75,11 +75,11 @@
 {{/each}}
 
 
-{{#each desc}}
+{{#each resources}}
 <section>
 <h2 class="TML" id="{{name}}">{{name}}</h2>
 <p><verbatim>{{subject}}</verbatim></p>
-<p><em>{{name}}</em> is an RDF description.</p>
+<p><em>{{name}}</em> is an RDF individual.</p>
 <p>{{comment}}</p>
 {{#if seeAlso}}
 <strong>See Also:</strong>
