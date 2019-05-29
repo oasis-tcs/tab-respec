@@ -47,7 +47,7 @@ function build (options, cb) {
                             " - Steve Speicher, http://stevespeicher.me/ (@sspeiche)\n" +
                             " - Nick Crossley (@ndjc) */\n" +
                             "/* Documentation: http://w3.org/respec/. */\n" +
-                            "/* See original source for licenses: https://github.com/ndjc/respec. */\n" +
+                            "/* See original source for licenses: https://github.com/oasis-tcs/tab-respec. */\n" +
                             "respecVersion = '" + version + "';\n" +
                             fs.readFileSync(config.out, "utf8") + "\nrequire(['profile-oasis-common']);\n");
         }

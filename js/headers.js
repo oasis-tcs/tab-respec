@@ -206,6 +206,7 @@ define(
                 conf.isStdTrack = conf.noRecTrack ? false : $.inArray(conf.specStatus, this.stdTrackStatus) >= 0;
                 conf.anOrA = $.inArray(conf.specStatus, this.precededByAn) >= 0 ? "an" : "a";
                 conf.maturity = (this.status2maturity[conf.specStatus]) ? this.status2maturity[conf.specStatus] : conf.specStatus;
+                if (!conf.thisVersion) conf.thisVersion = "";
                 conf.thisPDFVersion = conf.thisVersion.replace('.html', '.pdf');
                 // TODO: Determine right URI production
                 // conf.latestVersion = "http://docs.oasis-open.org/" + conf.wgShortName + "/";

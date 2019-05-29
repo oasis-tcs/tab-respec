@@ -6,13 +6,13 @@
 <link rel="stylesheet" type="text/css" href="../../styles/oslc-ccm-styles.css" />
 <link rel="stylesheet" type="text/css" href="../../styles/table-styles.css" />
 <link rel="stylesheet" type="text/css" href="../../styles/definition-styles.css" />
-<script src='https://ndjc.github.io/respec/builds/oasis/respec-oasis-common.js' async class='remove'></script>
+<script src='https://raw.githack.com/oasis-tcs/tab-respec/master/builds/respec-oasis-common.js' async class='remove'></script>
 <script class='remove'>
-	var respecConfig = {
-	   	// specification status (ED, CSD, CSPRD, CS, COS, OS, Errata, CND, CNPRD, CN).
-		// If in doubt use ED.
-		// See http://docs.oasis-open.org/specGuidelines/ndr/namingDirectives.html#stage
-		specStatus : "ED",
+    var respecConfig = {
+        // specification status (ED, CSD, CSPRD, CS, COS, OS, Errata, CND, CNPRD, CN).
+        // If in doubt use ED.
+        // See http://docs.oasis-open.org/specGuidelines/ndr/namingDirectives.html#stage
+        specStatus : "ED",
 
         // the specification's short name with version but no dots
         shortName : "oslc-xxx-10",
@@ -41,8 +41,8 @@
         // Only include h1 and h2 levels in the table of contents
         maxTocLevel: 2,
 
-		// if there a publicly available Editor's Draft, this is the link
-		edDraftURI:           "http://ndjc.github.io/respec/examples/oasis-oslc/template-spec.html",
+        // if there a publicly available Editor's Draft, this is the link
+        edDraftURI:           "https://raw.githack.com/oasis-tcs/tab-respec/master/examples/oasis-oslc/template-spec.html",
 
         // Chairs and editors, add as many as you like: you must have at least one editor.
         // Only "name" is required, but the other fields are recommended.
@@ -54,27 +54,27 @@
             companyURL : "http://example.com/"
           },
         ],
-		chairs : [ {
-			name :       "Chair Name",
-			url :        "http://example.org",
-			mailto :     "you@example.org",
-			company :    "Your Company",
-			companyURL : "http://example.com/"
+        chairs : [ {
+            name :       "Chair Name",
+            url :        "http://example.org",
+            mailto :     "you@example.org",
+            company :    "Your Company",
+            companyURL : "http://example.com/"
           },
         ],
 
-		// name of the TC
-		wg : "Committee Name",
+        // name of the TC
+        wg : "Committee Name",
         wgShortName:  "oslc-xxx",
 
-		// URI of the public TC page
-		wgURI : "https://www.oasis-open.org/apps/org/workgroup/oslc-xxx/",
+        // URI of the public TC page
+        wgURI : "https://www.oasis-open.org/apps/org/workgroup/oslc-xxx/",
 
         // name (without the @lists.oasis-open.org) of the public mailing to which comments are due
         wgPublicList: "oslc-xxx-comments",
 
-		// Namespaces defined by this TC
-		namespaces : [ { href: "http://open-services.net/ns/xxx#", prefix: "oslc-xxx" } ],
+        // Namespaces defined by this TC
+        namespaces : [ { href: "http://open-services.net/ns/xxx#", prefix: "oslc-xxx" } ],
 
         // For multi-part specifications, each part must list the other parts
         // additionalArtifacts : [
@@ -194,21 +194,21 @@
       you may have one shape per Turtle source file, or put several related shapes in one file;
       either way, you must have one data-include for each shape, using the right anchor URL.</em></p>
     <div title='RDF Shape for Example1'
-				data-include='./template-spec-shapes.ttl#ExampleShape1'
-				data-oninclude='shapeToSpec'
-				data-include-sync='true'
-				data-include-replace='true'
-				data-include-format='html'></div>
+                data-include='./template-spec-shapes.ttl#ExampleShape1'
+                data-oninclude='shapeToSpec'
+                data-include-sync='true'
+                data-include-replace='true'
+                data-include-format='html'></div>
   </section>
   <section>
     <h2>Shape2</h2>
     <p><em>Like first shape, included in same file, reusing some property definitions.</em></p>
     <div title='RDF Shape for Example2'
-				data-include='./template-spec-shapes.ttl#ExampleShape2'
-				data-oninclude='shapeToSpec'
-				data-include-sync='true'
-				data-include-replace='true'
-				data-include-format='html'></div>
+                data-include='./template-spec-shapes.ttl#ExampleShape2'
+                data-oninclude='shapeToSpec'
+                data-include-sync='true'
+                data-include-replace='true'
+                data-include-format='html'></div>
   </section>
   <section>
     <h2>Discovery</h2>
@@ -224,11 +224,11 @@
     These should be defined with consideration for global use (not within a specific type of resource).
     Other domains and resource types will be encouraged to reuse these.</em></p>
   <div title='RDF Vocabulary for Template'
-	data-include='./template-spec-vocab.ttl'
-	data-oninclude='vocabToSpec'
-	data-include-sync='true'
-	data-include-replace='true'
-	data-include-format='html'></div>
+    data-include='./template-spec-vocab.ttl'
+    data-oninclude='vocabToSpec'
+    data-include-sync='true'
+    data-include-replace='true'
+    data-include-format='html'></div>
 </section>
 <section class='appendix informative'>
   <h2>Acknowledgements</h2>
