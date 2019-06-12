@@ -121,8 +121,10 @@
      <ul>
      {{#each relatedWork}}
        <li>
+       {{#if style}}<div class='{{style}}'>{{/if}}
        {{#if title}}<span class='citationTitle'>{{title}}</span>.{{#if status}} {{status}}: {{/if}}{{/if}}
        {{#if href}}<a href='{{href}}'>{{href}}</a>{{/if}}
+       {{#if style}}</div>{{/if}}
        </li>
      {{/each}}
      </ul></dd>
@@ -140,7 +142,8 @@
     <br/><dt class='loc-heading'>Status:</dt>
     <dd>{{{status}}}</dd>
     {{#if citationLabel}}<br/><dt class='loc-heading'>Citation format:</dt>
-    <dd>When referencing this specification the following citation format should be used:
+    <dd>When referencing this specification the following citation format should be used
+    <span class='red'> (note that the URIs here need to be reviewed))</span>:
     <p>
     <span class='citationLabel'><strong>[{{citationLabel}}]</strong></span><br>
     <span class='citationTitle'>{{title}}</span>.

@@ -1,41 +1,45 @@
 <hr/>
 
 <h2 id="notices">Notices</h2>
-
-<p class='red'><em>TBD - this section needs updating for OSLC Open Projects!</em></p>
-
-{{#if isUnofficial}}
-  {{#if additionalCopyrightHolders}}
-    <p class='copyright'>{{{additionalCopyrightHolders}}}</p>
-  {{else}}
-    {{#if overrideCopyright}}
-      {{{overrideCopyright}}}
-    {{else}}
-      <p class='copyright'>
-        This document is licensed under a
-        <a class='subfoot' href='http://creativecommons.org/licenses/by/3.0/' rel='license'>Creative Commons
-        Attribution 3.0 License</a>.
-      </p>
-    {{/if}}
-  {{/if}}
-{{else}}
-  {{#if overrideCopyright}}
+{{#if overrideCopyright}}
     {{{overrideCopyright}}}
-  {{else}}
-   <p class='copyright'>
-     <p>Copyright &copy;
-        {{#if additionalCopyrightHolders}} {{{additionalCopyrightHolders}}} &amp;{{/if}}
-        OASIS Open
-        {{#if copyrightStart}}{{copyrightStart}}-{{/if}}{{publishYear}}.
-        All Rights Reserved.</p>
+{{else}}
+  <p class='copyright'>Copyright &copy;
+    {{#if additionalCopyrightHolders}} {{{additionalCopyrightHolders}}} &amp;{{/if}}
+    OASIS Open
+    {{#if copyrightStart}}{{copyrightStart}}-{{/if}}{{publishYear}}.
+    All Rights Reserved.
+  </p>
 
-<p>All capitalized terms in the following text have the
-meanings assigned to them in the OASIS Intellectual Property Rights Policy (the
-&quot;OASIS IPR Policy&quot;). The full <a
-href="https://www.oasis-open.org/policies-guidelines/ipr">Policy</a> may be
-found at the OASIS website.</p>
+  {{#if licenseURI}}
+    <p>
+      This specification is published under the <a href='{{licenseURI}}'>{{licenseName}}</a>.
+      {{#if additionalLicenses}}
+        {{#each additionalLicenses}}
+          Portions of this specification are also provided under the <a href='{{licenseURI}}'>{{licenseName}}</a>.
+        {{/each}}
+      {{/if}}
+    <p>All contributions made to this project have been made under the
+      <a href='https://www.oasis-open.org/policies-guidelines/open-projects-process#individual-cla-exhibit'>OASIS Contributor License Agreement (CLA)</a>.</p>
+    </p>
+    <p>
+    For information on whether any patents have been disclosed that may be essential to implementing this specification,
+    and any offers of patent licensing terms,
+    please refer to the
+    <a href="https://raw.githubcontent.com/oasis-open-projects/documentation/master/board-docs/IPR_STATEMENTS.md#open-services-for-lifecycle-collaboration-oslc-open-project">
+    Open Projects IPR Statements page</a>.
+    </p>
+  {{/if}}
+  <div class="red"><h4 class="red">Is this needed?</h4>
+  <p>All capitalized terms in the following text have the meanings assigned to them in the
+    OASIS Intellectual Property Rights Policy (the &quot;OASIS IPR Policy&quot;).
+    The full <a href="https://www.oasis-open.org/policies-guidelines/ipr">Policy</a>
+    may be found at the OASIS website.
+  </p>
 
-<p>This document and translations of it may be copied and
+      <p>
+
+      This document and translations of it may be copied and
 furnished to others, and derivative works that comment on or otherwise explain
 it or assist in its implementation may be prepared, copied, published, and
 distributed, in whole or in part, without restriction of any kind, provided
@@ -45,7 +49,9 @@ in any way, including by removing the copyright notice or references to OASIS,
 except as needed for the purpose of developing any document or deliverable
 produced by an OASIS Open Project (in which case the rules applicable to
 copyrights, as set forth in the OASIS IPR Policy, must be followed) or as
-required to translate it into languages other than English.</p>
+required to translate it into languages other than English.
+
+</p>
 
 <p>The limited permissions granted above are perpetual and will
 not be revoked by OASIS or its successors or assigns.</p>
@@ -87,15 +93,17 @@ representation that any information or list of intellectual property rights
 will at any time be complete, or that any claims in such list are, in fact,
 Essential Claims.</p>
 
+    {{#if addPatentNote}}<p>{{{addPatentNote}}}</p>{{/if}}
+
 <p>The name &quot;OASIS&quot; is a trademark of <a
 href="https://www.oasis-open.org/">OASIS</a>, the owner and developer of this
 specification, and should be used only to refer to the organization and its
 official outputs. OASIS welcomes reference to, and implementation and use of,
 specifications, while reserving the right to enforce its marks against
-misleading uses. Please see <span class=MsoHyperlink><a
-href="https://www.oasis-open.org/policies-guidelines/trademark">https://www.oasis-open.org/policies-guidelines/trademark</a></span>
+misleading uses. Please see
+<a href="https://www.oasis-open.org/policies-guidelines/trademark">https://www.oasis-open.org/policies-guidelines/trademark</a>
 for above guidance.</p>
-      </p>
-  {{/if}}
+
+    {{#if addTrademarkNote}}<p>{{{addTrademarkNote}}}</p>{{/if}}
+</div>
 {{/if}}
-<hr/>

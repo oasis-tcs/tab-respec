@@ -74,9 +74,7 @@
 //          - value: The value that will appear in the <dd> (e.g., "GitHub"). Optional.
 //          - href: a URL for the value (e.g., "http://foo.com/issues"). Optional.
 //          - class: a string representing CSS classes. Optional.
-//  - license: can either be "w3c" (for the currently default, restrictive license) or "cc-by" for
-//      the friendly persmissive dual license that nice people use (if they are participating in the
-//      HTML WG licensing experiment)
+//  - license: one of "apache", ... TODO
 
 define(
     ["handlebars"
@@ -173,7 +171,6 @@ define(
                 ,   PN:             "Project Note"
                 ,   PRD:            "Public Review Draft"
             }
-        ,   status2long:    { }
         ,   stdTrackStatus: ["WD", "PSD", "PSPRD", "PS", "COS", "OS", "Errata"]
         ,   noTrackStatus:  ["PND", "PNPRD", "PN"]
         ,   unPublished:    ["WD"]
@@ -187,8 +184,45 @@ define(
                     }
                 }
                 // validate configuration and derive new configuration values
-                if (!conf.license) conf.license = "oasis";
-                conf.isCCBY = conf.license === "cc-by";
+
+                // Start with license
+                if (!conf.licenseName || !conf.licenseURI) {
+                    if (!conf.license) {
+                        msg.pub("warning", "conf.license should be set - assuming Apache");
+                        conf.license = "apache";
+                    }
+                    if (conf.license === "apache") {
+                        conf.licenseName = "Apache License 2.0";
+                        conf.licenseURI = "https://www.apache.org/licenses/LICENSE-2.0";
+                    }
+                    else if (conf.license === "bsd") {
+                        conf.licenseName = "3-Clause BSD License";
+                        conf.licenseURI = "https://opensource.org/licenses/BSD-3-Clause";
+                    }
+                    else if (conf.license === "cc-by") {
+                        conf.licenseName = "Attribution 2.0 (CC BY 2.0)";
+                        conf.licenseURI = "https://creativecommons.org/licenses/by/2.0/legalcode";
+                    }
+
+                    else if (conf.license === "cc-by-4") {
+                        conf.licenseName = "Attribution 4.0 International (CC BY 4.0)";
+                        conf.licenseURI = "https://creativecommons.org/licenses/by/4.0/legalcode";
+                    }
+                    else if (conf.license === "eclipse") {
+                        conf.licenseName = "Eclipse Public License – v 1.0";
+                        conf.licenseURI = "https://www.eclipse.org/legal/epl-v10.html";
+                    }
+                    else if (conf.license === "mit") {
+                        conf.licenseName = "MIT License";
+                        conf.licenseURI = "https://opensource.org/licenses/MIT";
+                    }
+                    else {
+                        msg.pub("error", "Unknown license - use licenseName and licenseURI");
+                        conf.licenseName = "Apache License 2.0";
+                        conf.licenseURI = "https://www.apache.org/licenses/LICENSE-2.0";
+                    }
+                }
+
                 if (!conf.specStatus) msg.pub("error", "Missing required configuration: specStatus");
                 if (!conf.shortName) msg.pub("error", "Missing required configuration: shortName");
                 if (!conf.revision) msg.pub("error", "Missing required configuration: revision");
@@ -207,10 +241,12 @@ define(
                 conf.anOrA = $.inArray(conf.specStatus, this.precededByAn) >= 0 ? "an" : "a";
                 conf.maturity = (this.status2maturity[conf.specStatus]) ? this.status2maturity[conf.specStatus] : conf.specStatus;
                 if (!conf.thisVersion) conf.thisVersion = "";
+                // TODO - see issue #47
                 conf.thisPDFVersion = conf.thisVersion.replace('.html', '.pdf');
                 // TODO: Determine right URI production
                 // conf.latestVersion = "http://docs.oasis-open.org/" + conf.wgShortName + "/";
                 conf.latestPDFVersion = "";
+                // TODO - see above
                 if (conf.latestVersion) conf.latestPDFVersion = conf.latestVersion.replace('.html', '.pdf')
                 if (!conf.tcBaseURI) conf.tcBaseURI = "https://www.oasis-open.org/committees";
                 if (conf.previousPublishDate) {
@@ -247,15 +283,11 @@ define(
                     return "<a rel='alternate' href='" + alt.uri + "'" + optional + ">" + alt.label + "</a>";
                 });
                 if (conf.copyrightStart && conf.copyrightStart == conf.publishYear) conf.copyrightStart = "";
-                for (var k in this.status2text) {
-                    if (this.status2long[k]) continue;
-                    this.status2long[k] = this.status2text[k];
-                }
-                conf.longStatus = this.status2long[conf.specStatus];
                 conf.textStatus = this.status2text[conf.specStatus];
                 if (this.status2rdf[conf.specStatus]) {
                     conf.rdfStatus = this.status2rdf[conf.specStatus];
                 }
+                conf.noProjectStatus = conf.textStatus.replace(/^Project /,'');
                 conf.showThisVersion =  !conf.isNoTrack;
                 conf.showPreviousVersion = (conf.specStatus !== "WD"  &&
                                            !conf.isNoTrack);
@@ -347,15 +379,12 @@ define(
                 conf.sotdCustomParagraph = $sotd.html();
                 $sotd.remove();
                 conf.status = sotdTmpl(conf);
-
                 // insert into document and mark with microformat
                 $("body", doc).prepend($(headersTmpl(conf)))
                               .addClass("h-entry");
-
                 var $notices = $("#notices");
 
                 $(noticesTmpl(conf)).insertBefore($("#toc"));
-
                 msg.pub("end", "headers");
                 cb();
             }
