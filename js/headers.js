@@ -74,7 +74,7 @@
 //          - value: The value that will appear in the <dd> (e.g., "GitHub"). Optional.
 //          - href: a URL for the value (e.g., "http://foo.com/issues"). Optional.
 //          - class: a string representing CSS classes. Optional.
-//  - license: one of "apache", ... TODO
+//  - license: one of "apache", "bsd", "cc-by", cc-by-4", "eclipse", "mit"
 
 define(
     ["handlebars"
@@ -188,8 +188,8 @@ define(
                 // Start with license
                 if (!conf.licenseName || !conf.licenseURI) {
                     if (!conf.license) {
-                        msg.pub("warning", "conf.license should be set - assuming Apache");
-                        conf.license = "apache";
+                        msg.pub("error", "conf.license must be set");
+                        conf.license = "cc-by";
                     }
                     if (conf.license === "apache") {
                         conf.licenseName = "Apache License 2.0";
@@ -218,8 +218,8 @@ define(
                     }
                     else {
                         msg.pub("error", "Unknown license - use licenseName and licenseURI");
-                        conf.licenseName = "Apache License 2.0";
-                        conf.licenseURI = "https://www.apache.org/licenses/LICENSE-2.0";
+                        conf.licenseName = "Attribution 2.0 (CC BY 2.0)";
+                        conf.licenseURI = "https://creativecommons.org/licenses/by/2.0/legalcode";
                     }
                 }
 
@@ -287,7 +287,10 @@ define(
                 if (this.status2rdf[conf.specStatus]) {
                     conf.rdfStatus = this.status2rdf[conf.specStatus];
                 }
-                conf.noProjectStatus = conf.textStatus.replace(/^Project /,'');
+                conf.noProjectStatus = "";
+                if (conf.textStatus) {
+                    conf.noProjectStatus = conf.textStatus.replace(/^Project /,'');
+                }
                 conf.showThisVersion =  !conf.isNoTrack;
                 conf.showPreviousVersion = (conf.specStatus !== "WD"  &&
                                            !conf.isNoTrack);

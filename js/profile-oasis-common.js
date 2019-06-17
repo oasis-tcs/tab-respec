@@ -25,7 +25,6 @@ define([
         ,   "core-style"
         ,   "oasis-style"
         ,   "headers"
-/*      ,   "abstract" */
         ,   "conventions"
         ,   "conformance"
         ,   "data-transform"
@@ -75,5 +74,3 @@ function shapeToSpec(util, content, uri) {
     var shape = require("shape");
     return shape.shapeToSpec(util, content, uri);
 }
-
-

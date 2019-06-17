@@ -4,10 +4,12 @@
  *****************************************************************/
 
 /* --- INLINES --- */
-em.rfc2119 { 
+em.rfc2119 {
     text-transform:     lowercase;
     font-variant:       small-caps;
     font-style:         normal;
+    font-weight:        bold;
+    font-size:          105%;
     color:              #900;
 }
 
@@ -41,7 +43,9 @@ cite .bibref {
 }
 
 code {
-    color:  #C83500;
+    color:  #B02525;
+    font-weight: 600;
+    font-family: monospace;
 }
 
 /* --- TOC --- */

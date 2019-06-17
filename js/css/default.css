@@ -150,12 +150,25 @@ dl.spaced dd {
     margin-bottom: 4px;
 }
 
+dd {
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+.normalText {
+    color: black;
+    font-family: inherit;
+    font-size: 100%;
+    font-weight: normal;
+}
+
 .red {
     color: #FF0000;
 }
 .indent {
     margin-left: 2em;
 }
+
 body     {
            margin-left: 3pc;
            font-family: sans-serif,arial, helvetica;
