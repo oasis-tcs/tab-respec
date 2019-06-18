@@ -5,7 +5,7 @@
 
 // Module headers
 // Generate the headers material based on the provided configuration.
-// CONFIGURATION
+// CONFIGURATION -- TODO: bring this list of variables up to date
 //  - specStatus: the short code for the specification's maturity level or type (required)
 //  - shortName: the small name that is used after /TR/ in published reports (required)
 //  - revision: the revision number of the document at its given stage (required)
@@ -19,7 +19,7 @@
 //          - mailto: the person's email
 //          - note: a note on the person (e.g. former editor)
 //  - authors: an array of people who are contributing authors of the document.
-//  - chairs: an array of people who are chairing the TC producing this document.
+//  - chairs: an array of people who are chairing the group producing this document.
 //  - subtitle: a subtitle for the specification
 //  - publishDate: the date to use for the publication, default to document.lastModified, and
 //      failing that to now. The format is YYYY-MM-DD or a Date object.
@@ -45,16 +45,11 @@
 //  - prevRecShortname: the short name of the previous Recommendation, if the name has changed
 //  - prevRecURI: the URI of the previous Recommendation if not directly generated from
 //    prevRecShortname.
-//  - wg: the name of the WG in charge of the document. This may be an array in which case wgURI
-//      and wgPatentURI need to be arrays as well, of the same length and in the same order
-//  - wgURI: the URI to the group's page, or an array of such
-//  - wgPatentURI: the URI to the group's patent information page, or an array of such. NOTE: this
-//      is VERY IMPORTANT information to provide and get right, do not just paste this without checking
-//      that you're doing it right
-//  - wgPublicList: the name of the mailing list where discussion takes place. Note that this cannot
-//      be an array as it is assumed that there is a single list to discuss the document, even if it
-//      is handled by multiple groups
-//  - wgShortName: the name of the TC that is seen in the URL for publications
+//  - wg: the name of the project or working group in charge of the document.
+//  - wgShortName: the name of the project or working group that is seen in the URL for publications
+//  - wgURI: the URI to the group's page
+//  - wgPublicList: the name of the mailing list where discussion takes place
+
 //  - charterDisclosureURI: used for IGs (when publishing IG-NOTEs) to provide a link to the IPR commitment
 //      defined in their charter.
 //  - addPatentNote: used to add patent-related information to the SotD, for instance if there's an open
@@ -223,6 +218,11 @@ define(
                     }
                 }
 
+                if (!conf.wg)           conf.wg = "OASIS Open Services for Lifecycle Integration (OSLC) Open Projec";
+                if (!conf.wgShortName)  conf.wgShortName = "oslc-op";
+                if (!conf.wgURI)        conf.wgURI = "https://open-services.net/about/";
+                if (!conf.wgPublicList) conf.wgPublicList = "someone@somewhere.net";
+
                 if (!conf.specStatus) msg.pub("error", "Missing required configuration: specStatus");
                 if (!conf.shortName) msg.pub("error", "Missing required configuration: shortName");
                 if (!conf.revision) msg.pub("error", "Missing required configuration: revision");
@@ -248,7 +248,7 @@ define(
                 conf.latestPDFVersion = "";
                 // TODO - see above
                 if (conf.latestVersion) conf.latestPDFVersion = conf.latestVersion.replace('.html', '.pdf')
-                if (!conf.tcBaseURI) conf.tcBaseURI = "https://www.oasis-open.org/committees";
+                if (!conf.projectURI) conf.projectURI = "https://open-services.net/about/";
                 if (conf.previousPublishDate) {
                     if (!conf.previousMaturity)
                         msg.pub("error", "previousPublishDate is set, but not previousMaturity");
@@ -356,22 +356,6 @@ define(
                     msg.pub("error", "A short abstract is required.");
                 conf.shortAbstract = $shortAbstract.html();
                 $shortAbstract.remove();
-
-                if ($.isArray(conf.wg)) {
-                    conf.multipleWGs = conf.wg.length > 1;
-                    conf.wgHTML = utils.joinAnd($.isArray(conf.wg) ? conf.wg : [conf.wg], function (wg, idx) {
-                        return "<a href='" + conf.wgURI[idx] + "'>" + wg + "</a>";
-                    });
-                    var pats = [];
-                    for (var i = 0, n = conf.wg.length; i < n; i++) {
-                        pats.push("<a href='" + conf.wgPatentURI[i] + "' rel='disclosure'>" + conf.wg[i] + "</a>");
-                    }
-                    conf.wgPatentHTML = pats.join(", ");
-                }
-                else {
-                    conf.multipleWGs = false;
-                    conf.wgHTML = "<a href='" + conf.wgURI + "'>" + conf.wg + "</a>";
-                }
 
                 conf.stdNotExpected = (!conf.isStdTrack && conf.maturity == "WD");
 

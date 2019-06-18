@@ -20,13 +20,13 @@ oslc_xxx:
     rdfs:label                     "OSLC XXX vocabulary" ;
     vann:preferredNamespacePrefix  "oslc_xxx" ;
 
-    # This needs to refer to the published source of the vocabulary, in the OASIS document library
+    # This needs to refer to the published source of the vocabulary; TODO: what should this be for the open project?
     dcterms:source                 <http://docs.oasis-open.org/xxx.ttl> ;
 
     # TBD - what should the license and copyright info be here?
     dcterms:license                "TBD" ;
     dcterms:dateCopyrighted        "2012-2016" ;
-	rdfs:seeAlso                   <http://docs.oasis-open.org/tc-name/> .
+    rdfs:seeAlso                   <https://open-services.net/about/> .
 
 # Classes
 
