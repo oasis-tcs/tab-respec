@@ -48,6 +48,16 @@ code {
     font-family: monospace;
 }
 
+code.escape {
+    font-style: italic;
+}
+
+code.noescape {
+    font-style: normal;
+    color: rgb(0, 0, 0);
+    font-weight: normal;
+}
+
 /* --- TOC --- */
 .toc a, .tof a {
     text-decoration:    none;
