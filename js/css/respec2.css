@@ -106,20 +106,27 @@ table.simple {
 }
 
 /* --- DL --- */
-.section dd > p:first-child {
+
+dd {
+    margin-bottom:  1em;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+dd > p:first-child {
     margin-top: 0;
 }
 
-.section dd > p:last-child {
+dd > p:last-child {
     margin-bottom: 0;
 }
-
-.section dd {
-    margin-bottom:  1em;
+dd.p-author {
+    padding-bottom: 0;
+    margin-bottom:  0;
 }
 
-.section dl.attrs dd, .section dl.eldef dd {
-    margin-bottom:  0;
+li {
+   margin-bottom: 6px;
 }
 
 @media print {

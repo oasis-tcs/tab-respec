@@ -218,7 +218,7 @@ define(
                     }
                 }
 
-                if (!conf.wg)           conf.wg = "OASIS Open Services for Lifecycle Integration (OSLC) Open Projec";
+                if (!conf.wg)           conf.wg = "OASIS Open Services for Lifecycle Integration (OSLC) Open Project";
                 if (!conf.wgShortName)  conf.wgShortName = "oslc-op";
                 if (!conf.wgURI)        conf.wgURI = "https://open-services.net/about/";
                 if (!conf.wgPublicList) conf.wgPublicList = "someone@somewhere.net";

@@ -150,11 +150,6 @@ dl.spaced dd {
     margin-bottom: 4px;
 }
 
-dd {
-    padding-top: 5px;
-    padding-bottom: 10px;
-}
-
 .normalText {
     color: black;
     font-family: inherit;
