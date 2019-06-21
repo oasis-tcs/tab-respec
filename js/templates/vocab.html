@@ -10,24 +10,26 @@
 {{#if seeAlso}}</ul>{{/if}}
 
 {{#if classes}}
-<section><h2>RDFS Classes in this namespace</h2>
+<section id="classlist"><h2>Classes in this namespace ({{classes.length}})</h2>
 <p>{{#eachRange classes}}<a href="#{{name}}">{{name}}</a>{{/eachRange}}</p>
 </section>
 {{/if}}
 
 {{#if props}}
-<section><h2>RDF Properties in this namespace</h2>
+<section id="proplist"><h2>Properties in this namespace ({{props.length}})</h2>
 <p>{{#eachRange props}}<a href="#{{name}}">{{name}}</a>{{/eachRange}}</p>
 </section>
 {{/if}}
 
 {{#if resources}}
-<section><h2>RDF Resources (Individuals) in this namespace</h2>
+<section id="reslist"><h2>Resources (Individuals) in this namespace ({{resources.length}})</h2>
 <p>{{#eachRange resources}}<a href="#{{name}}">{{name}}</a>{{/eachRange}}</p>
 </section>
 {{/if}}
 
 
+{{#if classes}}
+<section id="classes">
 {{#each classes}}
 <section>
 {{#if archaic}}
@@ -50,7 +52,11 @@
 {{/if}}
 </section>
 {{/each}}
+</section>
+{{/if}}
 
+{{#if props}}
+<section id="props">
 {{#each props}}
 <section>
 {{#if archaic}}
@@ -73,8 +79,11 @@
 {{/if}}
 </section>
 {{/each}}
+</section>
+{{/if}}
 
-
+{{#if resources}}
+<section id="resources">
 {{#each resources}}
 <section>
 {{#if archaic}}
@@ -97,5 +106,7 @@
 {{/if}}
 </section>
 {{/each}}
+</section>
+{{/if}}
 
 </section>
