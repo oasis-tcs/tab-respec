@@ -78,7 +78,8 @@ define(
                 var classes = store.find(null, rdfType, rdfsClass);
                 conf.classes = classes;
 
-                var inputMap = [{predicate: rdfsLabel, name: "name"},
+                var inputMap = [{predicate: rdfType, name: "type"},
+                                {predicate: rdfsLabel, name: "name"},
                                 {predicate: rdfsComment, name: "comment"},
                                 {predicate: rdfsSeeAlso, name: "seeAlso", multiValue: true},
                                 {predicate: rdfsIsDefinedBy, name: "isDefinedBy"},
@@ -100,9 +101,12 @@ define(
                     }
                 });
 
-                var resources = store.find(null, rdfType, rdfResource);
-                conf.resources = resources;
+                var resources = store.find(null, rdfsIsDefinedBy, vocabSub);
                 fillHBJson(store, resources, inputMap);
+                resources = resources.filter(function(e) {
+                    return (e.type != rdfsClass && e.type != rdfProp)
+                });
+                conf.resources = resources;
                 resources.sort(function(a, b) { return a.name.localeCompare(b.name); });
 
                 //var template = hb.compile(vocabTmpl);
