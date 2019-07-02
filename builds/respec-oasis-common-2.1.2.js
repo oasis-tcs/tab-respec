@@ -3834,6 +3834,7 @@ define('tmpl!templates/notices.html', ['handlebars'], function (hb) { return Han
 // Generate the headers material based on the provided configuration.
 // CONFIGURATION -- TODO: bring this list of variables up to date
 //  - specStatus: the short code for the specification's maturity level or type (required)
+//  - label: the revision label used in the generated URIs and in the document header
 //  - shortName: the small name that is used as the directory name in the repo (required)
 //  - citationLabel: the citation label for the spec. If missing, no citation section is generated.
 //  - editors: an array of people editing the document (at least one is required). People
