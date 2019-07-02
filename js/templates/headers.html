@@ -8,7 +8,7 @@
   <h1 class='title' id='title'{{#if doRDFa}} property='dcterms:title'{{/if}}>{{title}}</h1>
   {{#if docStatus}}
     <h2 {{#if doRDFa}}property='bibo:subtitle' {{/if}}id='subtitle'>
-    {{#eachLineSlash docStatus}}{{this}}{{/eachLineSlash}}
+    {{docstatus}}
     </h2>
   {{/if}}
   <h2 {{#if doRDFa}}property="dcterms:issued" datatype="xsd:dateTime" content="{{publishISODate}}"{{/if}}><time class='dt-published' datetime='{{dashDate}}'>{{publishHumanDate}}</time></h2>
@@ -18,12 +18,12 @@
   <dl>
     {{#unless isNoTrack}}
       <br/><dt class='loc-heading'>This version:</dt>
-      <dd><a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a> (Authoritative)<br>
+      <dd><a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a><br>
       <a class='u-url' href='{{thisPDFVersion}}'>{{thisPDFVersion}}</a></dd>
         {{#if showPreviousVersion}}
           <br/><dt class='loc-heading'>Previous version:</dt>
           <dd><a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevVersion}}'>{{prevVersion}}</a><br>
-          <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevPDFVersion}}'>{{prevPDFVersion}}</dd>
+          <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevPDFVersion}}'>{{prevPDFVersion}}</a></dd>
         {{/if}}
       <br/><dt class='loc-heading'>Latest version:</dt>
       <dd>{{#if latestVersion}}<a href='{{latestVersion}}'>{{latestVersion}}</a> (Authoritative)<br>
@@ -148,10 +148,9 @@
     <span class='citationTitle'>{{title}}</span>.
     Edited by {{editorsHTML}}.
     {{publishHumanDate}}.
-    {{#if prependOASIS}}OASIS {{/if}}{{#if textStatus1}}{{textStatus1}} {{revision}} / {{textStatus2}} {{revision}}.
-    {{else}}{{textStatus}} {{revision}}{{/if}}
-    {{#if thisVersion}}<a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a>.{{/if}}
-    {{#if latestVersion}}Latest version: <a href='{{latestVersion}}'>{{latestVersion}}</a>.{{/if}}
+    {{#if prependOASIS}}OASIS {{/if}} {{textStatus}} {{label}}.
+    {{#if thisVersion}}<br><a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a>.{{/if}}
+    {{#if latestVersion}}<br>Latest version: <a href='{{latestVersion}}'>{{latestVersion}}</a>.{{/if}}
     </p>
     </dd>{{/if}}
   </dl>

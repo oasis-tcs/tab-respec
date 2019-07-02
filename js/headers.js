@@ -7,8 +7,7 @@
 // Generate the headers material based on the provided configuration.
 // CONFIGURATION -- TODO: bring this list of variables up to date
 //  - specStatus: the short code for the specification's maturity level or type (required)
-//  - shortName: the small name that is used after /TR/ in published reports (required)
-//  - revision: the revision number of the document at its given stage (required)
+//  - shortName: the small name that is used as the directory name in the repo (required)
 //  - citationLabel: the citation label for the spec. If missing, no citation section is generated.
 //  - editors: an array of people editing the document (at least one is required). People
 //      are defined using:
@@ -23,8 +22,6 @@
 //  - subtitle: a subtitle for the specification
 //  - publishDate: the date to use for the publication, default to document.lastModified, and
 //      failing that to now. The format is YYYY-MM-DD or a Date object.
-//  - previousPublishDate: the date on which the previous version was published.
-//  - previousMaturity: the specStatus of the previous version
 //  - errata: the URI of the errata document, if any
 //  - alternateFormats: a list of alternate formats for the document, each of which being
 //      defined by:
@@ -132,42 +129,36 @@ define(
             status2maturity:    {
                 WD:             "WD"
             ,   PSD:            "PSD"
-            ,   PSPRD:          "PSPRD"
             ,   PS:             "PS"
             ,   COS:            "COS"
             ,   OS:             "OS"
             ,   Errata:         "Errata"
             ,   PND:            "PND"
-            ,   PNPRD:          "PNPRD"
             ,   PN:             "PN"
             }
         ,   status2rdf: {
                 WD:             "oasis:WD",
                 PSD:            "oasis:PSD",
-                PSPRD:          "oasis:PSPRD",
                 PS:             "oasis:PS",
                 COS:            "oasis:COS",
                 OS:             "oasis:OS",
                 Errata:         "oasis:Errata",
                 PND:            "oasis:PND",
-                PNPRD:          "oasis:PNPRD",
                 PN:             "oasis:PN"
             }
         ,   status2text: {
                     WD:             "Working Draft"
                 ,   PSD:            "Project Specification Draft"
-                ,   PSPRD:          "Project Specification Public Review Draft"
                 ,   PS:             "Project Specification"
                 ,   COS:            "Candidate OASIS Standard"
                 ,   OS:             "OASIS Standard"
                 ,   Errata:         "Approved Errata"
                 ,   PND:            "Project Note Draft"
-                ,   PNPRD:          "Project Note Public Review Draft"
                 ,   PN:             "Project Note"
                 ,   PRD:            "Public Review Draft"
             }
-        ,   stdTrackStatus: ["WD", "PSD", "PSPRD", "PS", "COS", "OS", "Errata"]
-        ,   noTrackStatus:  ["PND", "PNPRD", "PN"]
+        ,   stdTrackStatus: ["WD", "PSD", "PS", "COS", "OS", "Errata"]
+        ,   noTrackStatus:  ["PND", "PN"]
         ,   unPublished:    ["WD"]
 
         ,   run:    function (conf, doc, cb, msg) {
@@ -184,7 +175,7 @@ define(
                 if (!conf.licenseName || !conf.licenseURI) {
                     if (!conf.license) {
                         msg.pub("error", "conf.license must be set");
-                        conf.license = "cc-by";
+                        conf.license = "cc-by-4";
                     }
                     if (conf.license === "apache") {
                         conf.licenseName = "Apache License 2.0";
@@ -212,56 +203,52 @@ define(
                         conf.licenseURI = "https://opensource.org/licenses/MIT";
                     }
                     else {
-                        msg.pub("error", "Unknown license - use licenseName and licenseURI");
-                        conf.licenseName = "Attribution 2.0 (CC BY 2.0)";
-                        conf.licenseURI = "https://creativecommons.org/licenses/by/2.0/legalcode";
+                        msg.pub("error", "Unknown license - use licenseName and licenseURI - CC BY 4.0 assumed");
+                        conf.licenseName = "Attribution 4.0 International (CC BY 4.0)";
+                        conf.licenseURI = "https://creativecommons.org/licenses/by/4.0/legalcode";
                     }
                 }
 
                 if (!conf.wg)           conf.wg = "OASIS Open Services for Lifecycle Integration (OSLC) Open Project";
                 if (!conf.wgShortName)  conf.wgShortName = "oslc-op";
                 if (!conf.wgURI)        conf.wgURI = "https://open-services.net/about/";
+
+                // TODO - not yet fixed
                 if (!conf.wgPublicList) conf.wgPublicList = conf.wgShortName + "@lists.oasis-open-projects.org";
 
                 if (!conf.specStatus) msg.pub("error", "Missing required configuration: specStatus");
                 if (!conf.shortName) msg.pub("error", "Missing required configuration: shortName");
-                if (!conf.revision) msg.pub("error", "Missing required configuration: revision");
+                if (!conf.label) msg.pub("error", "Missing required configuration: label");
                 conf.title = doc.title || "No Title";
                 if (!conf.subtitle) conf.subtitle = "";
-                if (!conf.publishDate) {
-                    conf.publishDate = utils.parseLastModified(doc.lastModified);
-                }
-                else {
-                    if (!(conf.publishDate instanceof Date)) conf.publishDate = utils.parseSimpleDate(conf.publishDate);
-                }
-                conf.publishYear = conf.publishDate.getFullYear();
-                conf.publishHumanDate = utils.humanDate(conf.publishDate);
+
                 conf.isNoTrack = $.inArray(conf.specStatus, this.noTrackStatus) >= 0;
                 conf.isStdTrack = conf.noRecTrack ? false : $.inArray(conf.specStatus, this.stdTrackStatus) >= 0;
                 conf.anOrA = $.inArray(conf.specStatus, this.precededByAn) >= 0 ? "an" : "a";
                 conf.maturity = (this.status2maturity[conf.specStatus]) ? this.status2maturity[conf.specStatus] : conf.specStatus;
-                if (!conf.thisVersion) conf.thisVersion = "";
-                // TODO - see issue #47
-                conf.thisPDFVersion = conf.thisVersion.replace('.html', '.pdf');
-                // TODO: Determine right URI production
-                // conf.latestVersion = "http://docs.oasis-open.org/" + conf.wgShortName + "/";
-                conf.latestPDFVersion = "";
-                // TODO - see above
-                if (conf.latestVersion) conf.latestPDFVersion = conf.latestVersion.replace('.html', '.pdf')
-                if (!conf.projectURI) conf.projectURI = "https://open-services.net/about/";
-                if (conf.previousPublishDate) {
-                    if (!conf.previousMaturity)
-                        msg.pub("error", "previousPublishDate is set, but not previousMaturity");
-                    if (!(conf.previousPublishDate instanceof Date))
-                        conf.previousPublishDate = utils.parseSimpleDate(conf.previousPublishDate);
-                    var pmat = (this.status2maturity[conf.previousMaturity]) ? this.status2maturity[conf.previousMaturity] :
-                                                                               conf.previousMaturity;
-                    conf.prevVersion = "http://docs.oasis-open.org/" + conf.wgShortName + "/" + conf.previousPublishDate.getFullYear() + "/" + pmat + "-" +
-                              conf.shortName + "-" + utils.concatDate(conf.previousPublishDate) + "/";
+
+                // Derive specification URIs
+                if (!conf.thisVersion) {
+                    var base = window.location.href.replace(/.*\//, "");
+                    var shortname = conf.shortName.replace(/^oslc-/, "");
+                    conf.thisVersion = "https://www.open-services.net/specifications/"
+                        + shortname
+                        + "/"
+                        + conf.label
+                        + "/"
+                        + base;
                 }
-                if (!conf.prevVersion) conf.prevVersion = "";
+                if (!conf.latestVersion) conf.latestVersion = conf.thisVersion.replace("/" + conf.label + "/","/");
+                conf.thisPDFVersion = conf.thisVersion.replace('.html', '.pdf');
+                conf.latestPDFVersion = conf.latestVersion.replace('.html', '.pdf')
+                if (!conf.prevVersion) {
+                    conf.prevVersion = "";
+                    if (conf.prevLabel)
+                        conf.prevVersion = conf.thisVersion.replace("/" + conf.label + "/","/" + conf.prevLabel + "/");
+                }
                 conf.prevPDFVersion = conf.prevVersion.replace('.html', '.pdf');
-                if (conf.prevRecShortname && !conf.prevRecURI) conf.prevRecURI = "http://docs.oasis-open.org/" + conf.prevRecShortname;
+                if (!conf.projectURI) conf.projectURI = "https://open-services.net/about/";
+
                 if (!conf.editors || conf.editors.length === 0) msg.pub("error", "At least one editor is required");
                 var peopCheck = function (i, it) {
                     if (!it.name) msg.pub("error", "All authors and editors must have a name.");
@@ -292,43 +279,34 @@ define(
                     conf.noProjectStatus = conf.textStatus.replace(/^Project /,'');
                 }
                 conf.showThisVersion =  !conf.isNoTrack;
-                conf.showPreviousVersion = (conf.specStatus !== "WD"  &&
-                                           !conf.isNoTrack);
+                conf.showPreviousVersion = (conf.specStatus !== "WD" && !conf.isNoTrack);
                 conf.notYetStd = (conf.isStdTrack && conf.specStatus !== "OS");
                 conf.isStd = (conf.isStdTrack && conf.specStatus === "OS");
                 conf.notStd = (conf.specStatus !== "OS");
                 conf.prependOASIS = true;
                 conf.isWD = (conf.specStatus === "WD");
                 conf.isPS = (conf.specStatus === "PS");
-                conf.isPSPR = (conf.specStatus === "PSPRD");
-                conf.isPNPR = (conf.specStatus === "PNPRD");
                 conf.isCOS = (conf.specStatus === "COS");
                 conf.isOS = (conf.specStatus === "OS");
                 conf.isAE = (conf.specStatus === "Errata");
+
+                if (!conf.publishDate || conf.isWD) {
+                    conf.publishDate = utils.parseLastModified(doc.lastModified);
+                }
+                else {
+                    if (!(conf.publishDate instanceof Date)) conf.publishDate = utils.parseSimpleDate(conf.publishDate);
+                }
+                conf.publishYear = conf.publishDate.getFullYear();
+                if (conf.isWD || conf.isNoTrack) {
+                    conf.publishHumanDate = "Last modified on ";
+                }
+                else {
+                    conf.publishHumanDate = "Published ";
+                }
+                conf.publishHumanDate = conf.publishHumanDate + utils.humanDate(conf.publishDate);
                 conf.dashDate = utils.concatDate(conf.publishDate, "-");
                 conf.publishISODate = utils.isoDate(conf.publishDate) ;
-
-                if ($.inArray(conf.specStatus, this.unPublished) < 0) {
-                   if (conf.isPSPR) {
-                      conf.docStatus = [
-                        this.status2text["PSD"] + " " + conf.revision,
-                        this.status2text["PRD"] + " " + conf.revision
-                      ];
-                      conf.textStatus1 = this.status2text["PSD"];
-                      conf.textStatus2 = this.status2text["PRD"];
-                   }
-                   else if (conf.isPNPR) {
-                      conf.docStatus = [
-                        this.status2text["PND"] + " " + conf.revision,
-                        this.status2text["PRD"] + " " + conf.revision
-                      ];
-                      conf.textStatus1 = this.status2text["PND"];
-                      conf.textStatus2 = this.status2text["PRD"];
-                   }
-                   else {
-                      conf.docStatus = [conf.textStatus + " " + conf.revision];
-                   }
-                }
+                conf.docStatus = conf.textStatus + " " + conf.label;
 
                 // configuration done!
 

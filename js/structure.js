@@ -68,7 +68,7 @@ define(
                                       .append($kidsHolder.contents());
                     var $item = $("<li class='tocline'/>").append($a);
                     if (conf.maxTocLevel == 0 || level <= conf.maxTocLevel) {
-                    	$ul.append($item);
+                        $ul.append($item);
                     }
                     current.push(0);
                     var $sub = makeTOCAtLevel($sec, doc, current, level + 1, conf);
@@ -83,7 +83,7 @@ define(
             run:    function (conf, doc, cb, msg) {
                 msg.pub("start", "structure");
                 if (!conf.tocIntroductory) conf.tocIntroductory = false;
-                if (!conf.maxTocLevel) conf.maxTocLevel = 0;
+                if (!conf.maxTocLevel) conf.maxTocLevel = 2;
                 var $secs = $("section:not(.introductory)", doc)
                                 .find("h1:first, h2:first, h3:first, h4:first, h5:first, h6:first")
                 ,   finish = function () {
