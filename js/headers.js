@@ -226,6 +226,21 @@ define(
                 conf.anOrA = $.inArray(conf.specStatus, this.precededByAn) >= 0 ? "an" : "a";
                 conf.maturity = (this.status2maturity[conf.specStatus]) ? this.status2maturity[conf.specStatus] : conf.specStatus;
 
+                conf.isWD = (conf.specStatus === "WD");
+                conf.isPSD = (conf.specStatus === "PSD");
+                conf.isPS = (conf.specStatus === "PS");
+                conf.isCOS = (conf.specStatus === "COS");
+                conf.isOS = (conf.specStatus === "OS");
+                conf.isAE = (conf.specStatus === "Errata");
+
+                conf.showThisVersion =  !conf.isNoTrack;
+                conf.showPDF = !conf.isNoTrack && !conf.isWD && !conf.isPSD; 
+                conf.showPreviousVersion = (!conf.isNoTrack);
+                conf.notYetStd = (conf.isStdTrack && conf.specStatus !== "OS");
+                conf.isStd = (conf.isStdTrack && conf.specStatus === "OS");
+                conf.notStd = (conf.specStatus !== "OS");
+                conf.prependOASIS = true;
+
                 // Derive specification URIs
                 if (!conf.thisVersion) {
                     var base = window.location.href.replace(/.*\//, "");
@@ -277,34 +292,31 @@ define(
                 if (conf.textStatus) {
                     conf.noProjectStatus = conf.textStatus.replace(/^Project /,'');
                 }
-                conf.showThisVersion =  !conf.isNoTrack;
-                conf.showPreviousVersion = (conf.specStatus !== "WD" && !conf.isNoTrack);
-                conf.notYetStd = (conf.isStdTrack && conf.specStatus !== "OS");
-                conf.isStd = (conf.isStdTrack && conf.specStatus === "OS");
-                conf.notStd = (conf.specStatus !== "OS");
-                conf.prependOASIS = true;
-                conf.isWD = (conf.specStatus === "WD");
-                conf.isPS = (conf.specStatus === "PS");
-                conf.isCOS = (conf.specStatus === "COS");
-                conf.isOS = (conf.specStatus === "OS");
-                conf.isAE = (conf.specStatus === "Errata");
 
-                if (!conf.publishDate || conf.isWD) {
-                    conf.publishDate = utils.parseLastModified(doc.lastModified);
+                if(conf.isWD && !conf.publishDate) {
+                    conf.publishDate = false;
+                    conf.docTime = false;
                 }
+                // if (!conf.publishDate || conf.isWD) {
+                //     conf.publishDate = utils.parseLastModified(doc.lastModified);
+                //     conf.docTime = null;
+                // }
                 else {
                     if (!(conf.publishDate instanceof Date)) conf.publishDate = utils.parseSimpleDate(conf.publishDate);
+                    if(conf.publishDate instanceof Date) {
+                        conf.publishYear = conf.publishDate.getFullYear();
+                        if (conf.isWD || conf.isNoTrack) {
+                            conf.publishHumanDate = "last modified on ";
+                        }
+                        else {
+                            conf.publishHumanDate = "published on ";
+                        }
+                        conf.publishHumanDate = conf.publishHumanDate + utils.humanDate(conf.publishDate);
+                        conf.dashDate = utils.concatDate(conf.publishDate, "-");
+                        conf.publishISODate = utils.isoDate(conf.publishDate) ;
+                        console.log(conf.publishHumanDate);
+                    }
                 }
-                conf.publishYear = conf.publishDate.getFullYear();
-                if (conf.isWD || conf.isNoTrack) {
-                    conf.publishHumanDate = "Last modified on ";
-                }
-                else {
-                    conf.publishHumanDate = "Published ";
-                }
-                conf.publishHumanDate = conf.publishHumanDate + utils.humanDate(conf.publishDate);
-                conf.dashDate = utils.concatDate(conf.publishDate, "-");
-                conf.publishISODate = utils.isoDate(conf.publishDate) ;
                 conf.docStatus = conf.textStatus + " " + conf.label;
 
                 // configuration done!
