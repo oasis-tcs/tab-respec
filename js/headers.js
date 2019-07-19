@@ -234,7 +234,7 @@ define(
                 conf.isAE = (conf.specStatus === "Errata");
 
                 conf.showThisVersion =  !conf.isNoTrack;
-                conf.showPDF = !conf.isNoTrack && !conf.isWD && !conf.isPSD; 
+                conf.showPDF = !conf.isNoTrack && !conf.isWD && !conf.isPSD;
                 conf.showPreviousVersion = (!conf.isNoTrack);
                 conf.notYetStd = (conf.isStdTrack && conf.specStatus !== "OS");
                 conf.isStd = (conf.isStdTrack && conf.specStatus === "OS");
@@ -293,10 +293,11 @@ define(
                     conf.noProjectStatus = conf.textStatus.replace(/^Project /,'');
                 }
 
-                if(conf.isWD && !conf.publishDate) {
+                if (conf.isWD && !conf.publishDate) {
                     conf.publishDate = false;
                     conf.docTime = false;
                 }
+                // Cannot rely on document modify time - git content negotiators get it wrong!
                 // if (!conf.publishDate || conf.isWD) {
                 //     conf.publishDate = utils.parseLastModified(doc.lastModified);
                 //     conf.docTime = null;
@@ -314,10 +315,19 @@ define(
                         conf.publishHumanDate = conf.publishHumanDate + utils.humanDate(conf.publishDate);
                         conf.dashDate = utils.concatDate(conf.publishDate, "-");
                         conf.publishISODate = utils.isoDate(conf.publishDate) ;
-                        console.log(conf.publishHumanDate);
                     }
                 }
                 conf.docStatus = conf.textStatus + " " + conf.label;
+
+                msg.pub("error", "start looking at PM");
+                if (conf.previousMaturity) {
+                   conf.previousDocStatus = this.status2text[conf.previousMaturity];
+                   if (conf.previousPublishDate) {
+                      if (!(conf.previousPublishDate instanceof Date)) conf.previousPublishDate = utils.parseSimpleDate(conf.previousPublishDate);
+                      conf.previousPublishHumanDate = utils.humanDate(conf.previousPublishDate);
+                   }
+                }
+                msg.pub("error", "done looking at PM");
 
                 // configuration done!
 

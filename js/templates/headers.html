@@ -21,11 +21,16 @@
     {{#unless isNoTrack}}
       <br/><dt class='loc-heading'>This version:</dt>
       <dd><a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a><br>
-      {{#if showPDF}}<a class='u-url' href='{{thisPDFVersion}}'>{{thisPDFVersion}}</a>{{/if}}</dd>
+        {{#if showPDF}}<a class='u-url' href='{{thisPDFVersion}}'>{{thisPDFVersion}}</a>{{/if}}</dd>
         {{#if showPreviousVersion}}
           <br/><dt class='loc-heading'>Previous version:</dt>
-          <dd><a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevVersion}}'>{{prevVersion}}</a><br>
-          <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevPDFVersion}}'>{{prevPDFVersion}}</a></dd>
+          <dd>
+            <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevVersion}}'>{{prevVersion}}</a><br>
+            <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevPDFVersion}}'>{{prevPDFVersion}}</a>
+            {{#if previousDocStatus}}
+              <br/>(published as {{previousDocStatus}}{{#if previousPublishHumanDate}} on {{previousPublishHumanDate}}{{/if}})
+            {{/if}}
+          </dd>
         {{/if}}
       <br/><dt class='loc-heading'>Latest version:</dt>
       <dd>{{#if latestVersion}}<a href='{{latestVersion}}'>{{latestVersion}}</a> (Authoritative){{/if}}</dd>
