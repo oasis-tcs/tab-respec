@@ -319,7 +319,6 @@ define(
                 }
                 conf.docStatus = conf.textStatus + " " + conf.label;
 
-                msg.pub("error", "start looking at PM");
                 if (conf.previousMaturity) {
                    conf.previousDocStatus = this.status2text[conf.previousMaturity];
                    if (conf.previousPublishDate) {
@@ -327,7 +326,6 @@ define(
                       conf.previousPublishHumanDate = utils.humanDate(conf.previousPublishDate);
                    }
                 }
-                msg.pub("error", "done looking at PM");
 
                 // configuration done!
 
