@@ -19,19 +19,27 @@
   </dl>
   <dl>
     {{#unless isNoTrack}}
-      <br/><dt class='loc-heading'>This stage:</dt>
-      <dd><a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a><br>
-        {{#if showPDF}}<a class='u-url' href='{{thisPDFVersion}}'>{{thisPDFVersion}}</a>{{/if}}</dd>
-        {{#if showPreviousVersion}}
-          <br/><dt class='loc-heading'>Previous stage:</dt>
-          <dd>
-            <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevVersion}}'>{{prevVersion}}</a><br>
-            <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevPDFVersion}}'>{{prevPDFVersion}}</a>
-            {{#if previousDocStatus}}
-              <br/>(published as {{previousDocStatus}}{{#if previousPublishHumanDate}} on {{previousPublishHumanDate}}{{/if}})
-            {{/if}}
-          </dd>
+      {{#unless isWD}}
+      <br/>
+      <dt class='loc-heading'>This stage:</dt>
+      <dd>
+        <a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a>
+        <br>
+        {{#if showPDF}}
+        <a class='u-url' href='{{thisPDFVersion}}'>{{thisPDFVersion}}</a>
         {{/if}}
+      </dd>
+      {{/unless}}
+      {{#if showPreviousVersion}}
+        <br/><dt class='loc-heading'>Previous stage:</dt>
+        <dd>
+          <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevVersion}}'>{{prevVersion}}</a><br>
+          <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevPDFVersion}}'>{{prevPDFVersion}}</a>
+          {{#if previousDocStatus}}
+            <br/>(published as {{previousDocStatus}}{{#if previousPublishHumanDate}} on {{previousPublishHumanDate}}{{/if}})
+          {{/if}}
+        </dd>
+      {{/if}}
       {{#if latestVersion}}
       <br/>
       <dt class='loc-heading'>Latest stage:</dt>

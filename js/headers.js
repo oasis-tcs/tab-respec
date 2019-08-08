@@ -305,8 +305,10 @@ define(
                 //     conf.docTime = null;
                 // }
                 else {
-                    if (!(conf.publishDate instanceof Date)) conf.publishDate = utils.parseSimpleDate(conf.publishDate);
-                    if(conf.publishDate instanceof Date) {
+                    if(conf.publishDate) {
+                        if (!(conf.publishDate instanceof Date)) {
+                            conf.publishDate = utils.parseSimpleDate(conf.publishDate);
+                        }
                         conf.publishYear = conf.publishDate.getFullYear();
                         if (conf.isWD || conf.isNoTrack) {
                             conf.publishHumanDate = "last modified on ";
@@ -317,6 +319,10 @@ define(
                         conf.publishHumanDate = conf.publishHumanDate + utils.humanDate(conf.publishDate);
                         conf.dashDate = utils.concatDate(conf.publishDate, "-");
                         conf.publishISODate = utils.isoDate(conf.publishDate) ;
+                    } else {
+                        if(conf.isStdTrack && !conf.isWD) {
+                            msg.pub("error", "A published standards-track document MUST have a 'publishDate' set explicitly.");
+                        }
                     }
                 }
                 conf.docStatus = conf.textStatus + " " + conf.label;
