@@ -19,11 +19,11 @@
   </dl>
   <dl>
     {{#unless isNoTrack}}
-      <br/><dt class='loc-heading'>This revision:</dt>
+      <br/><dt class='loc-heading'>This stage:</dt>
       <dd><a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a><br>
         {{#if showPDF}}<a class='u-url' href='{{thisPDFVersion}}'>{{thisPDFVersion}}</a>{{/if}}</dd>
         {{#if showPreviousVersion}}
-          <br/><dt class='loc-heading'>Previous revision:</dt>
+          <br/><dt class='loc-heading'>Previous stage:</dt>
           <dd>
             <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevVersion}}'>{{prevVersion}}</a><br>
             <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevPDFVersion}}'>{{prevPDFVersion}}</a>
