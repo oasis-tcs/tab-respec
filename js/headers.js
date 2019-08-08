@@ -217,7 +217,9 @@ define(
 
                 if (!conf.specStatus) msg.pub("error", "Missing required configuration: specStatus");
                 if (!conf.shortName) msg.pub("error", "Missing required configuration: shortName");
-                if (!conf.label) msg.pub("error", "Missing required configuration: label");
+                if (!conf.label) {
+                    conf.label = conf.specStatus + conf.revision;
+                }
                 conf.title = doc.title || "No Title";
                 if (!conf.subtitle) conf.subtitle = "";
 
