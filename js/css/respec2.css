@@ -134,3 +134,18 @@ li {
         display: none;
     }
 }
+
+
+/* --- OASIS Open Project formatting */
+
+#respecHeader dd {
+    margin: 0;
+  }
+
+#respecHeader dt.loc-heading {
+font-weight: 700;
+}
+
+h1, h2, h3, h4 {
+color: #446CAA;
+}
