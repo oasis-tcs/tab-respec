@@ -311,10 +311,10 @@ define(
                         }
                         conf.publishYear = conf.publishDate.getFullYear();
                         if (conf.isWD || conf.isNoTrack) {
-                            conf.publishHumanDate = "last modified on ";
+                            conf.publishHumanDate = "Last modified on ";
                         }
                         else {
-                            conf.publishHumanDate = "published on ";
+                            conf.publishHumanDate = "";
                         }
                         conf.publishHumanDate = conf.publishHumanDate + utils.humanDate(conf.publishDate);
                         conf.dashDate = utils.concatDate(conf.publishDate, "-");

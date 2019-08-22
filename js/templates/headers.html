@@ -11,7 +11,8 @@
     <span {{#if doRDFa}}property='bibo:subtitle' {{/if}}id='subtitle'>{{docStatus}}</span>
     {{/if}}
     {{#if publishHumanDate}}
-    <span {{#if doRDFa}}property="dcterms:issued" datatype="xsd:dateTime" content="{{publishISODate}}"{{/if}}>(<time class='dt-published' datetime='{{dashDate}}'>{{publishHumanDate}}</time>)</span>
+    <br>
+    <span {{#if doRDFa}}property="dcterms:issued" datatype="xsd:dateTime" content="{{publishISODate}}"{{/if}}><time class='dt-published' datetime='{{dashDate}}'>{{publishHumanDate}}</time></span>
     {{/if}}
   </h2>
   <dl>
