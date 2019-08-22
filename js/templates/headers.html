@@ -11,7 +11,7 @@
     <span {{#if doRDFa}}property='bibo:subtitle' {{/if}}id='subtitle'>{{docStatus}}</span>
     {{/if}}
     {{#if publishHumanDate}}
-    <br>
+    <br/>
     <span {{#if doRDFa}}property="dcterms:issued" datatype="xsd:dateTime" content="{{publishISODate}}"{{/if}}><time class='dt-published' datetime='{{dashDate}}'>{{publishHumanDate}}</time></span>
     {{/if}}
   </h2>
@@ -21,8 +21,8 @@
       <br/>
       <dt class='loc-heading'>This stage:</dt>
       <dd>
-        <a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a>
-        <br>
+        <a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a> (Authoritative)
+        <br/>
         {{#if showPDF}}
         <a class='u-url' href='{{thisPDFVersion}}'>{{thisPDFVersion}}</a>
         {{/if}}
@@ -31,7 +31,8 @@
       {{#if showPreviousVersion}}
         <br/><dt class='loc-heading'>Previous stage:</dt>
         <dd>
-          <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevVersion}}'>{{prevVersion}}</a><br>
+          <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevVersion}}'>{{prevVersion}}</a> (Authoritative)
+          <br/>
           <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevPDFVersion}}'>{{prevPDFVersion}}</a>
           {{#if previousDocStatus}}
             <br/>(published as {{previousDocStatus}}{{#if previousPublishHumanDate}} on {{previousPublishHumanDate}}{{/if}})
@@ -41,7 +42,14 @@
       {{#if latestVersion}}
       <br/>
       <dt class='loc-heading'>Latest stage:</dt>
-      <dd><a href='{{latestVersion}}'>{{latestVersion}}</a> (Authoritative)</dd>
+      <dd>
+        <a href='{{latestVersion}}'>{{latestVersion}}</a> (Authoritative)
+        {{#if showPDF}}
+        <br/>
+        <a href='{{latestVersion}}'>{{latestPDFVersion}}</a>
+        {{/if}}
+      </dd>
+
       {{/if}}
       {{#if latestSpecVersion}}
       <br/>
@@ -157,20 +165,20 @@
        {{/if}}
      {{/each}}
     {{/if}}
-    <br><dt class='loc-heading'>Abstract:</dt>
+    <br/><dt class='loc-heading'>Abstract:</dt>
     <dd>{{{shortAbstract}}}</dd>
     <br/><dt class='loc-heading'>Status:</dt>
     <dd>{{{status}}}</dd>
     {{#if citationLabel}}<br/><dt class='loc-heading'>Citation format:</dt>
     <dd>When referencing this specification the following citation format should be used:
     <p>
-    <span class='citationLabel'><strong>[{{citationLabel}}]</strong></span><br>
+    <span class='citationLabel'><strong>[{{citationLabel}}]</strong></span><br/>
     <span class='citationTitle'>{{title}}</span>.
     Edited by {{editorsHTML}}.
     {{publishHumanDate}}.
     {{#if prependOASIS}}OASIS {{/if}} {{textStatus}} {{label}}.
-    {{#if thisVersion}}<br><a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a>.{{/if}}
-    {{#if latestVersion}}<br>Latest version: <a href='{{latestVersion}}'>{{latestVersion}}</a>.{{/if}}
+    {{#if thisVersion}}<br/><a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a>.{{/if}}
+    {{#if latestVersion}}<br/>Latest version: <a href='{{latestVersion}}'>{{latestVersion}}</a>.{{/if}}
     </p>
     </dd>{{/if}}
   </dl>

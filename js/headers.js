@@ -236,7 +236,7 @@ define(
                 conf.isAE = (conf.specStatus === "Errata");
 
                 conf.showThisVersion =  !conf.isNoTrack;
-                conf.showPDF = !conf.isNoTrack && !conf.isWD && !conf.isPSD;
+                conf.showPDF = !conf.isNoTrack && !conf.isWD;
                 conf.showPreviousVersion = (!conf.isNoTrack);
                 conf.notYetStd = (conf.isStdTrack && conf.specStatus !== "OS");
                 conf.isStd = (conf.isStdTrack && conf.specStatus === "OS");
