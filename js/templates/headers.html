@@ -176,9 +176,9 @@
     <span class='citationTitle'>{{title}}</span>.
     Edited by {{editorsHTML}}.
     {{publishHumanDate}}.
-    {{#if prependOASIS}}OASIS {{/if}} {{textStatus}} {{label}}.
-    {{#if thisVersion}}<br/><a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a>.{{/if}}
-    {{#if latestVersion}}<br/>Latest version: <a href='{{latestVersion}}'>{{latestVersion}}</a>.{{/if}}
+    {{#if prependOASIS}}OASIS {{/if}} {{textStatus}} {{revision}}.
+    {{#if thisVersion}} <a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a>.{{/if}}
+    {{#if latestVersion}} Latest version: <a href='{{latestVersion}}'>{{latestVersion}}</a>.{{/if}}
     </p>
     </dd>{{/if}}
   </dl>
