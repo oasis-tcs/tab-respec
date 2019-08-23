@@ -146,6 +146,10 @@ li {
 font-weight: 700;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, dt.loc-heading {
 color: #446CAA;
+}
+
+body#respecDocument h2 > #subtitle {
+  line-height: 1.6em;
 }
