@@ -325,7 +325,7 @@ define(
                         }
                     }
                 }
-                conf.docStatus = conf.textStatus + " " + conf.label;
+                conf.docStatus = conf.textStatus + " " + conf.revision;
 
                 if (conf.previousMaturity) {
                    conf.previousDocStatus = this.status2text[conf.previousMaturity];
