@@ -15,18 +15,6 @@
 </section>
 {{/if}}
 
-{{#if props}}
-<section id="proplist"><h2>Properties in this namespace ({{props.length}})</h2>
-<p>{{#eachRange props}}<a href="#{{name}}">{{name}}</a>{{/eachRange}}</p>
-</section>
-{{/if}}
-
-{{#if resources}}
-<section id="reslist"><h2>Resources (Individuals) in this namespace ({{resources.length}})</h2>
-<p>{{#eachRange resources}}<a href="#{{name}}">{{name}}</a>{{/eachRange}}</p>
-</section>
-{{/if}}
-
 
 {{#if classes}}
 <section id="classes">
@@ -56,6 +44,12 @@
 {{/if}}
 
 {{#if props}}
+<section id="proplist"><h2>Properties in this namespace ({{props.length}})</h2>
+<p>{{#eachRange props}}<a href="#{{name}}">{{name}}</a>{{/eachRange}}</p>
+</section>
+{{/if}}
+
+{{#if props}}
 <section id="props">
 {{#each props}}
 <section>
@@ -79,6 +73,12 @@
 {{/if}}
 </section>
 {{/each}}
+</section>
+{{/if}}
+
+{{#if resources}}
+<section id="reslist"><h2>Resources (Individuals) in this namespace ({{resources.length}})</h2>
+<p>{{#eachRange resources}}<a href="#{{name}}">{{name}}</a>{{/eachRange}}</p>
 </section>
 {{/if}}
 
