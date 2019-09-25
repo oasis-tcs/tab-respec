@@ -25,16 +25,27 @@ define(
             };
         };
         var REF_STATUSES = {
+                // W3C status values:
             "NOTE":     "W3C Note"
         ,   "WG-NOTE":  "W3C Working Group Note"
         ,   "ED":       "W3C Editor's Draft"
         ,   "FPWD":     "W3C First Public Working Draft"
-        ,   "WD":       "W3C Working Draft"
         ,   "LCWD":     "W3C Last Call Working Draft"
         ,   "CR":       "W3C Candidate Recommendation"
         ,   "PR":       "W3C Proposed Recommendation"
         ,   "PER":      "W3C Proposed Edited Recommendation"
         ,   "REC":      "W3C Recommendation"
+
+                // OASIS status values
+        ,   "WD":       "Working Draft"
+        ,   "PSD":      "Project Specification Draft"
+        ,   "PS":       "Project Specification"
+        ,   "COS":      "Candidate OASIS Standard"
+        ,   "OS":       "OASIS Standard"
+        ,   "Errata":   "Approved Errata"
+        ,   "PND":      "Project Note Draft"
+        ,   "PN":       "Project Note"
+        ,   "PRD":      "Public Review Draft"
         };
         var stringifyRef = function(ref) {
             if (typeof ref === "string") return ref;
