@@ -7,7 +7,6 @@
 // Generate the headers material based on the provided configuration.
 // CONFIGURATION -- TODO: bring this list of variables up to date
 //  - specStatus: the short code for the specification's maturity level or type (required)
-//  - label: the revision label used in the generated URIs and in the document header
 //  - shortName: the small name that is used as the directory name in the repo (required)
 //  - citationLabel: the citation label for the spec. If missing, no citation section is generated.
 //  - editors: an array of people editing the document (at least one is required). People
@@ -33,8 +32,7 @@
 //  - testSuiteURI: the URI to the test suite, if any
 //  - implementationReportURI: the URI to the implementation report, if any
 //  - noStdTrack: set to true if this document is not intended to be on the Recommendation track
-//  - edDraftURI: the URI of the Editor's Draft for this document, if any. Required if
-//      specStatus is set to "ED".
+//  - edDraftURI: the URI of the Editor's Draft for this document, if any.
 //  - additionalCopyrightHolders: a copyright owner in addition to W3C (or the only one if specStatus
 //      is unofficial)
 //  - overrideCopyright: provides markup to completely override the copyright
@@ -47,6 +45,7 @@
 //  - wgShortName: the name of the project or working group that is seen in the URL for publications
 //  - wgURI: the URI to the group's page
 //  - wgPublicList: the name of the mailing list where discussion takes place
+//  - label: override the revision label used in the generated URIs and in the document header
 
 //  - charterDisclosureURI: used for IGs (when publishing IG-NOTEs) to provide a link to the IPR commitment
 //      defined in their charter.
@@ -70,11 +69,12 @@
 //  - license: one of "apache", "bsd", "cc-by", cc-by-4", "eclipse", "mit"
 
 define(
-    ["handlebars"
-    ,"utils"
-    ,"tmpl!templates/headers.html"
-    ,"tmpl!templates/sotd.html"
-    ,"tmpl!templates/notices.html"
+    [
+          "handlebars"
+        , "utils"
+        , "tmpl!templates/headers.html"
+        , "tmpl!templates/sotd.html"
+        , "tmpl!templates/notices.html"
     ],
     function (hb, utils, headersTmpl, sotdTmpl, noticesTmpl) {
         Handlebars.registerHelper("showPeople", function (name, items) {
@@ -127,41 +127,44 @@ define(
 
 
         return {
-            status2maturity:    {
-                WD:             "WD"
-            ,   PSD:            "PSD"
-            ,   PS:             "PS"
-            ,   COS:            "COS"
-            ,   OS:             "OS"
-            ,   Errata:         "Errata"
-            ,   PND:            "PND"
-            ,   PN:             "PN"
+            status2maturity: {
+                WD:         "WD"
+            ,   PSD:        "PSD"
+            ,   PS:         "PS"
+            ,   COS:        "COS"
+            ,   OS:         "OS"
+            ,   Errata:     "Errata"
+            ,   PND:        "PND"
+            ,   PN:         "PN"
             }
         ,   status2rdf: {
-                WD:             "oasis:WD",
-                PSD:            "oasis:PSD",
-                PS:             "oasis:PS",
-                COS:            "oasis:COS",
-                OS:             "oasis:OS",
-                Errata:         "oasis:Errata",
-                PND:            "oasis:PND",
-                PN:             "oasis:PN"
+                WD:         "oasis:WD"
+            ,   PSD:        "oasis:PSD"
+            ,   PS:         "oasis:PS"
+            ,   COS:        "oasis:COS"
+            ,   OS:         "oasis:OS"
+            ,   Errata:     "oasis:Errata"
+            ,   PND:        "oasis:PND"
+            ,   PN:         "oasis:PN"
             }
         ,   status2text: {
-                    WD:             "Working Draft"
-                ,   PSD:            "Project Specification Draft"
-                ,   PS:             "Project Specification"
-                ,   COS:            "Candidate OASIS Standard"
-                ,   OS:             "OASIS Standard"
-                ,   Errata:         "Approved Errata"
-                ,   PND:            "Project Note Draft"
-                ,   PN:             "Project Note"
-                ,   PRD:            "Public Review Draft"
+                WD:         "Working Draft"
+            ,   PSD:        "Project Specification Draft"
+            ,   PS:         "Project Specification"
+            ,   COS:        "Candidate OASIS Standard"
+            ,   OS:         "OASIS Standard"
+            ,   Errata:     "Approved Errata"
+            ,   PND:        "Project Note Draft"
+            ,   PN:         "Project Note"
             }
         ,   stdTrackStatus: ["WD", "PSD", "PS", "COS", "OS", "Errata"]
         ,   noTrackStatus:  ["PND", "PN"]
-        ,   unPublished:    ["WD"]
-
+        ,   unPublished:    ["WD", "PND"]
+        ,   baseURIs: {
+                WD:         "https://raw.githubusercontent.com/oslc-specs/specs/"
+              , OASIS:      "https://docs.oasis-open-projects.org/oslc-op/"
+              , OSN:        "https://open-services.net/specs/"
+            }
         ,   run:    function (conf, doc, cb, msg) {
                 msg.pub("start", "headers");
 
@@ -170,7 +173,8 @@ define(
                         conf.doRDFa = '1.1';
                     }
                 }
-                // validate configuration and derive new configuration values
+
+                // Validate configuration and derive new configuration values
 
                 // Start with license
                 if (!conf.licenseName || !conf.licenseURI) {
@@ -209,24 +213,35 @@ define(
                         conf.licenseURI = "https://creativecommons.org/licenses/by/4.0/legalcode";
                     }
                 }
+                msg.pub("trace",`license set: ${conf.licenseName} : ${conf.licenseURI}`);
 
+                // Check for required configuration settings
+                if (!conf.specStatus)   msg.pub("error", "Missing required configuration: specStatus");
+                if (!conf.shortName)    msg.pub("error", "Missing required configuration: shortName");
+                var shortname = conf.shortName || (conf.isNoTrack ? "Untitled specification" : "Untitled note");
+                shortname = shortname.replace(/^oslc-/, "");
+                var statusLower = conf.specStatus.toLowerCase();
+                var fileName = window.location.href.replace(/.*\//, "");
+                msg.pub("trace",`shortname=${shortname}; fileName=${fileName}`);
+
+                // Set defaults for others
                 if (!conf.wg)           conf.wg = "OASIS Open Services for Lifecycle Integration (OSLC) Open Project";
                 if (!conf.wgShortName)  conf.wgShortName = "oslc-op";
                 if (!conf.wgURI)        conf.wgURI = "https://open-services.net/about/";
                 if (!conf.wgPublicList) conf.wgPublicList = conf.wgShortName + "@lists.oasis-open-projects.org";
-
-                if (!conf.specStatus) msg.pub("error", "Missing required configuration: specStatus");
-                if (!conf.shortName) msg.pub("error", "Missing required configuration: shortName");
-                if (!conf.label) {
-                    conf.label = conf.specStatus + conf.revision;
-                }
-                conf.title = doc.title || "No Title";
-                if (!conf.subtitle) conf.subtitle = "";
+                if (!conf.projectURI)   conf.projectURI = "https://open-services.net/about/";
+                if (!conf.citationLabel) conf.citationLabel = conf.shortName.toUpperCase() + "-" + conf.oslcVersion;
+                msg.pub("trace","citationLabel="+conf.citationLabel);
 
                 conf.isNoTrack = $.inArray(conf.specStatus, this.noTrackStatus) >= 0;
                 conf.isStdTrack = conf.noRecTrack ? false : $.inArray(conf.specStatus, this.stdTrackStatus) >= 0;
                 conf.anOrA = $.inArray(conf.specStatus, this.precededByAn) >= 0 ? "an" : "a";
                 conf.maturity = (this.status2maturity[conf.specStatus]) ? this.status2maturity[conf.specStatus] : conf.specStatus;
+
+                if (!conf.label) conf.label = shortname + "-v" + conf.oslcVersion + "-" + statusLower + conf.revision;
+                conf.title = doc.title || fileName.replace(/\.[^.]*$/, "");
+                if (!conf.subtitle) conf.subtitle = "";
+                msg.pub("trace",`label=${conf.label}; title=${conf.title}`);
 
                 conf.isWD = (conf.specStatus === "WD");
                 conf.isPSD = (conf.specStatus === "PSD");
@@ -234,36 +249,49 @@ define(
                 conf.isCOS = (conf.specStatus === "COS");
                 conf.isOS = (conf.specStatus === "OS");
                 conf.isAE = (conf.specStatus === "Errata");
+                conf.isDraft = (conf.specStatus === "WD" || conf.specStatus === "PND");
 
-                conf.showThisVersion =  !conf.isNoTrack;
-                conf.showPDF = !conf.isNoTrack && !conf.isWD;
-                conf.showPreviousVersion = (!conf.isNoTrack);
+                conf.showThisVersion = !conf.isNoTrack;
+                conf.showPDF = !conf.isNoTrack && !conf.isDraft && !conf.isPSD;
+                conf.showPreviousVersion = (conf.previousVersion && !conf.isNoTrack);
                 conf.notYetStd = (conf.isStdTrack && conf.specStatus !== "OS");
                 conf.isStd = (conf.isStdTrack && conf.specStatus === "OS");
                 conf.notStd = (conf.specStatus !== "OS");
                 conf.prependOASIS = true;
 
-                // Derive specification URIs
-                if (!conf.thisVersion) {
-                    var base = window.location.href.replace(/.*\//, "");
-                    var shortname = conf.shortName.replace(/^oslc-/, "");
-                    conf.thisVersion = "https://www.open-services.net/specifications/"
-                        + shortname
-                        + "/"
-                        + conf.label
-                        + "/"
-                        + base;
+                if (!conf.edDraftURI)           conf.edDraftURI = this.baseURIs["OSN"] + shortname + "/latest-draft";
+                if (!conf.latestURI)            conf.latestURI = this.baseURIs["OSN"] + shortname + "/latest";
+                if (!conf.latestRevOfStageURI)  conf.latestRevOfStageURI = this.baseURIs["OASIS"] + shortname + "-v" + conf.oslcVersion;
+                if (!conf.thisVersionURI)       conf.thisVersionURI = conf.thisVersion;
+                if (!conf.thisVersionURI)       conf.thisVersionURI = conf.isDraft ?
+                        this.baseURIs["WD"] + conf.label + "/" + fileName
+                        : this.baseURIs["OASIS"] + conf.label + "/" + fileName;
+                if (!conf.prevVersionURI)       conf.prevVersionURI = conf.prevVersion;
+
+                msg.pub("trace",`URIs:
+                conf.edDraftURI          = ${conf.edDraftURI}
+                conf.latestURI           = ${conf.latestURI}
+                conf.latestRevOfStageURI = ${conf.latestRevOfStageURI}
+                conf.thisVersionURI      = ${conf.thisVersionURI}
+                conf.prevVersionURI      = ${conf.prevVersionURI || conf.prevVersion}`);
+
+                conf.thisPDFVersion = conf.thisVersionURI.replace('.html', '.pdf');
+
+                // Alternate formats - verify, add this PDF if not already there, and process to HTML
+                $.each(conf.alternateFormats || [], function (i, it) {
+                    if (!it.uri || !it.type || !it.label) msg.pub("error", "All alternate formats must have a uri, a type, and a label.");
+                    if (it.type === "PDF") conf.thisPDFVersion = "";
+                });
+                if (conf.showPDF) {
+                    conf.alternateFormats.unshift({uri: conf.thisPDFVersion, type: "PDF", label: "PDF"});
+                    msg.pub("trace","Added "+conf.thisPDFVersion+" to alternateFormats");
                 }
-                if (!conf.latestVersion) conf.latestVersion = conf.thisVersion.replace("/" + conf.label + "/","/");
-                conf.thisPDFVersion = conf.thisVersion.replace('.html', '.pdf');
-                conf.latestPDFVersion = conf.latestVersion.replace('.html', '.pdf')
-                if (!conf.prevVersion) {
-                    conf.prevVersion = "";
-                    if (conf.prevLabel)
-                        conf.prevVersion = conf.thisVersion.replace("/" + conf.label + "/","/" + conf.prevLabel + "/");
-                }
-                conf.prevPDFVersion = conf.prevVersion.replace('.html', '.pdf');
-                if (!conf.projectURI) conf.projectURI = "https://open-services.net/about/";
+                conf.multipleAlternates = conf.alternateFormats && conf.alternateFormats.length > 1;
+                conf.alternatesHTML = utils.joinAnd(conf.alternateFormats, function (alt) {
+                    var optional = (alt.hasOwnProperty('lang') && alt.lang) ? " hreflang='" + alt.lang + "'" : "";
+                    optional += (alt.hasOwnProperty('type') && alt.type) ? " type='" + alt.type + "'" : "";
+                    return "<a rel='alternate' href='" + alt.uri + "'" + optional + ">" + alt.label + "</a>";
+                });
 
                 if (!conf.editors || conf.editors.length === 0) msg.pub("error", "At least one editor is required");
                 var peopCheck = function (i, it) {
@@ -276,15 +304,7 @@ define(
                 conf.multipleAuthors = conf.authors && conf.authors.length > 1;
                 conf.multipleChairs = conf.chairs && conf.chairs.length > 1;
                 conf.editorsHTML = utils.joinAnd($.isArray(conf.editors) ? conf.editors : [conf.editors], function(ed) {return ed.name;});
-                $.each(conf.alternateFormats || [], function (i, it) {
-                    if (!it.uri || !it.label) msg.pub("error", "All alternate formats must have a uri and a label.");
-                });
-                conf.multipleAlternates = conf.alternateFormats && conf.alternateFormats.length > 1;
-                conf.alternatesHTML = utils.joinAnd(conf.alternateFormats, function (alt) {
-                    var optional = (alt.hasOwnProperty('lang') && alt.lang) ? " hreflang='" + alt.lang + "'" : "";
-                    optional += (alt.hasOwnProperty('type') && alt.type) ? " type='" + alt.type + "'" : "";
-                    return "<a rel='alternate' href='" + alt.uri + "'" + optional + ">" + alt.label + "</a>";
-                });
+
                 if (conf.copyrightStart && conf.copyrightStart == conf.publishYear) conf.copyrightStart = "";
                 conf.textStatus = this.status2text[conf.specStatus];
                 if (this.status2rdf[conf.specStatus]) {
@@ -294,38 +314,37 @@ define(
                 if (conf.textStatus) {
                     conf.noProjectStatus = conf.textStatus.replace(/^Project /,'');
                 }
+                // ????? FIXME
+                conf.docStatus = conf.textStatus + " " + conf.label;
 
-                if (conf.isWD && !conf.publishDate) {
-                    conf.publishDate = false;
-                    conf.docTime = false;
-                }
-                // Cannot rely on document modify time - git content negotiators get it wrong!
-                // if (!conf.publishDate || conf.isWD) {
-                //     conf.publishDate = utils.parseLastModified(doc.lastModified);
-                //     conf.docTime = null;
+                // ????? FIXME
+                // if (conf.isWD && !conf.publishDate) {
+                // conf.publishDate = false;
                 // }
-                else {
-                    if(conf.publishDate) {
-                        if (!(conf.publishDate instanceof Date)) {
-                            conf.publishDate = utils.parseSimpleDate(conf.publishDate);
-                        }
-                        conf.publishYear = conf.publishDate.getFullYear();
-                        if (conf.isWD || conf.isNoTrack) {
-                            conf.publishHumanDate = "Last modified on ";
-                        }
-                        else {
-                            conf.publishHumanDate = "";
-                        }
-                        conf.publishHumanDate = conf.publishHumanDate + utils.humanDate(conf.publishDate);
-                        conf.dashDate = utils.concatDate(conf.publishDate, "-");
-                        conf.publishISODate = utils.isoDate(conf.publishDate) ;
-                    } else {
-                        if(conf.isStdTrack && !conf.isWD) {
-                            msg.pub("error", "A published standards-track document MUST have a 'publishDate' set explicitly.");
-                        }
+                // Cannot rely on document modify time - git content negotiators get it wrong!
+                if (!conf.publishDate || conf.isDraft) {
+                    conf.publishDate = utils.parseLastModified(doc.lastModified);
+                }
+                if (conf.publishDate) {
+                    if (!(conf.publishDate instanceof Date)) {
+                        conf.publishDate = utils.parseSimpleDate(conf.publishDate);
+                    }
+                    conf.publishYear = conf.publishDate.getFullYear();
+                    if (conf.isDraft || conf.isNoTrack) {
+                        conf.publishHumanDate = "last modified on ";
+                    }
+                    else {
+                        conf.publishHumanDate = "published on ";
+                    }
+                    conf.publishHumanDate = conf.publishHumanDate + utils.humanDate(conf.publishDate);
+                    conf.dashDate = utils.concatDate(conf.publishDate, "-");
+                    conf.publishISODate = utils.isoDate(conf.publishDate) ;
+                } else {
+                    if (conf.isStdTrack && !conf.isWD) {
+                        msg.pub("error", "A published standards-track document MUST have a 'publishDate' set explicitly.");
                     }
                 }
-                conf.docStatus = conf.textStatus + " " + conf.revision;
+                msg.pub("trace",`publishDate=${conf.publishDate}, publishHumanDate=${conf.publishHumanDate}`);
 
                 if (conf.previousMaturity) {
                    conf.previousDocStatus = this.status2text[conf.previousMaturity];
@@ -361,8 +380,6 @@ define(
                     msg.pub("error", "A short abstract is required.");
                 conf.shortAbstract = $shortAbstract.html();
                 $shortAbstract.remove();
-
-                conf.stdNotExpected = (!conf.isStdTrack && conf.maturity == "WD");
 
                 // handle SotD
                 var $sotd = $("#sotd");

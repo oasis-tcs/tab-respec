@@ -16,45 +16,47 @@
     {{/if}}
   </h2>
   <dl>
+    <dt><span class='loc-heading' style='font-size: 125%'>Specification URIs</span></dt>
+  </dl>
+  <dl>
+  <p>
+  ===========   Debug:<br />
+  This revision:              {{thisRevisionURI}}<br />
+  This version:               {{thisVersionURI}}<br />
+  Previous version:           {{previousVersionURI}}<br />
+  Previous revision:          {{previousRevisionURI}}<br />
+  Latest rev of this stage:   {{latestRevOfStageURI}}<br />
+  Latest version:             {{latestVersionURI}}<br />
+  Latest editor's draft:      {{edDraftURI}}<br />
+  ===========
+  </p>
     {{#unless isNoTrack}}
       {{#unless isWD}}
       <br/>
       <dt class='loc-heading'>This stage:</dt>
       <dd>
-        <a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a> (Authoritative)
-        <br/>
-        {{#if showPDF}}
-        <a class='u-url' href='{{thisPDFVersion}}'>{{thisPDFVersion}}</a>
-        {{/if}}
+        <a class='u-url' href='{{thisVersionURI}}'>{{thisVersionURI}}</a>
+        <br>
       </dd>
       {{/unless}}
       {{#if showPreviousVersion}}
         <br/><dt class='loc-heading'>Previous stage:</dt>
         <dd>
-          <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevVersion}}'>{{prevVersion}}</a> (Authoritative)
-          <br/>
-          <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevPDFVersion}}'>{{prevPDFVersion}}</a>
+          <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevVersionURI}}'>{{prevVersionURI}}</a><br>
           {{#if previousDocStatus}}
             <br/>(published as {{previousDocStatus}}{{#if previousPublishHumanDate}} on {{previousPublishHumanDate}}{{/if}})
           {{/if}}
         </dd>
       {{/if}}
-      {{#if latestVersion}}
-      <br/>
-      <dt class='loc-heading'>Latest stage:</dt>
-      <dd>
-        <a href='{{latestVersion}}'>{{latestVersion}}</a> (Authoritative)
-        {{#if showPDF}}
+      {{#if latestVersionURI}}
         <br/>
-        <a href='{{latestVersion}}'>{{latestPDFVersion}}</a>
-        {{/if}}
-      </dd>
-
+        <dt class='loc-heading'>Latest version:</dt>
+        <dd><a href='{{latestVersionURI}}'>{{latestVersionURI}}</a> (Authoritative)</dd>
       {{/if}}
-      {{#if latestSpecVersion}}
-      <br/>
-      <dt class='loc-heading'>Latest version:</dt>
-      <dd><a href='{{latestSpecVersion}}'>{{latestSpecVersion}}</a></dd>
+      {{#if latestRevOfStageURI}}
+        <br/>
+        <dt class='loc-heading'>Latest revision of this stage:</dt>
+        <dd><a href='latestRevOfStageURI'>{{latestRevOfStageURI}}</a></dd>
       {{/if}}
     {{/unless}}
     {{#if edDraftURI}}
@@ -176,9 +178,9 @@
     <span class='citationTitle'>{{title}}</span>.
     Edited by {{editorsHTML}}.
     {{publishHumanDate}}.
-    {{#if prependOASIS}}OASIS {{/if}} {{textStatus}} {{revision}}.
-    {{#if thisVersion}} <a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a>.{{/if}}
-    {{#if latestVersion}} Latest stage: <a href='{{latestVersion}}'>{{latestVersion}}</a>.{{/if}}
+    {{#if prependOASIS}}OASIS {{/if}} {{textStatus}} {{label}}. <span class='red'>variable TBD.</span>
+    {{#if thisVersionURI}} <a class='u-url' href='{{thisVersionURI}}'>{{thisVersionURI}}</a>.{{/if}}
+    {{#if latestVersionURI}}<br/>Latest version: <a href='{{latestVersionURI}}'>{{latestVersionURI}}</a>.{{/if}}
     </p>
     </dd>{{/if}}
   </dl>

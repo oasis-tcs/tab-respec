@@ -57,6 +57,9 @@ if (window.console) {
     respecEvents.sub("start", function (details) {
         if (respecConfig && respecConfig.trace) console.log(">>> began: " + details);
     });
+    respecEvents.sub("trace", function (details) {
+        if (respecConfig && respecConfig.trace) console.log("=== trace: " + details);
+    });
     respecEvents.sub("end", function (details) {
         if (respecConfig && respecConfig.trace) console.log("<<< finished: " + details);
     });
