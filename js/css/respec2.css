@@ -153,3 +153,31 @@ color: #446CAA;
 body#respecDocument h2 > #subtitle {
   line-height: 1.6em;
 }
+
+hr {
+  page-break-before: always;
+}
+
+@media print {
+    body > section {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    h2 {
+        margin-top: 0 !important;
+    }
+
+    hr.print {
+        border: none;
+    }
+}
+
+
+.break {
+  page-break-before: always;
+}
+
+.nobreak {
+  page-break-before: avoid;
+}

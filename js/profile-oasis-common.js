@@ -44,6 +44,7 @@ define([
         ,   "structure"
         ,   "informative"
         ,   "id-headers"
+        ,   "hr-headers"
         ,   "conformance-table"
         ,   "aria"
         ,   "vocab"
