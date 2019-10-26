@@ -242,7 +242,6 @@ table.query th {
 }
 
 body > section {
-    border-top: medium solid #666666;
     padding-top: 12px;
     margin-top: 16px;
 }
