@@ -254,9 +254,7 @@ define(
                         + "/"
                         + base;
                 }
-                if(!conf.isWD) {
-                    $("head").append($("<base>").attr("href", conf.thisVersion)); 
-                }
+
                 if (!conf.latestVersion) conf.latestVersion = conf.thisVersion.replace("/" + conf.label + "/","/");
                 conf.thisPDFVersion = conf.thisVersion.replace('.html', '.pdf');
                 conf.latestPDFVersion = conf.latestVersion.replace('.html', '.pdf')
