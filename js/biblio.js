@@ -162,7 +162,7 @@ define(
                                 .concat(refs.informativeReferences)
                                 .concat(localAliases);
                 if (refs.length) {
-                    var url = "https://labs.w3.org/specrefs/bibrefs?refs=" + refs.join(",");
+                    var url = "https://api.specref.org/bibrefs?refs=" + refs.join(",");
                     $.ajax({
                         dataType:   "json"
                     ,   url:        url
