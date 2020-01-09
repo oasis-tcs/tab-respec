@@ -177,6 +177,8 @@ define(
                         }
                     ,   error:      function (xhr, status, error) {
                             msg.pub("error", "Error loading references from '" + url + "': " + status + " (" + error + ")");
+                            conf.biblio = conf.localBiblio;
+                            bibref(conf, msg);
                             finish();
                         }
                     });
