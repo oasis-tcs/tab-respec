@@ -35,7 +35,7 @@ define(
         ,   "PR":       "W3C Proposed Recommendation"
         ,   "PER":      "W3C Proposed Edited Recommendation"
         ,   "REC":      "W3C Recommendation"
-        };
+       };
         var stringifyRef = function(ref) {
             if (typeof ref === "string") return ref;
             var output = "";
@@ -132,11 +132,11 @@ define(
         return {
             stringifyRef: stringifyRef,
             run:    function (conf, doc, cb, msg) {
-                msg.pub("start", "core/biblio");
+                msg.pub("start", "oasis/biblio");
                 var refs = getRefKeys(conf)
                 ,   localAliases = []
                 ,   finish = function () {
-                        msg.pub("end", "core/biblio");
+                        msg.pub("end", "oasis/biblio");
                         cb();
                     }
                 ;
@@ -151,7 +151,7 @@ define(
                                 .concat(refs.informativeReferences)
                                 .concat(localAliases);
                 if (refs.length) {
-                    var url = "https://labs.w3.org/specrefs/bibrefs?refs=" + refs.join(",");
+                    var url = "https://api.specref.org/bibrefs?refs=" + refs.join(",");
                     $.ajax({
                         dataType:   "json"
                     ,   url:        url
@@ -166,6 +166,8 @@ define(
                         }
                     ,   error:      function (xhr, status, error) {
                             msg.pub("error", "Error loading references from '" + url + "': " + status + " (" + error + ")");
+                            conf.biblio = conf.localBiblio;
+                            bibref(conf, msg);
                             finish();
                         }
                     });

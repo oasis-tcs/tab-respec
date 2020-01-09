@@ -2,7 +2,7 @@
 // Search Specref database
 
 define(
-    ["jquery", "core/biblio"],
+    ["jquery", "oasis/biblio"],
     function ($, biblio) {
         function pluralize (count, sing, plur) {
             return count + ' ' + (count == 1 ? sing : plur);
@@ -41,7 +41,7 @@ define(
                 $halp.find("form").on("submit", function() {
                     $status.html("Searching…");
                     var query = $search.val();
-                    $.getJSON("https://labs.w3.org/specrefs/search-refs", { q: query }).then(function(json) {
+                    $.getJSON("https://api.specref.org/specrefs/search-refs", { q: query }).then(function(json) {
                         var output = buildResults(json);
                         $results.html(output.html);
                         $status.html(msg(query, output.count));
