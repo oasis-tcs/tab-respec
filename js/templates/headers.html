@@ -31,11 +31,15 @@
       {{#if showPreviousVersion}}
         <br/><dt class='loc-heading'>Previous stage:</dt>
         <dd>
+          {{#if prevVersion}}
           <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevVersion}}'>{{prevVersion}}</a> (Authoritative)
           <br/>
           <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevPDFVersion}}'>{{prevPDFVersion}}</a>
           {{#if previousDocStatus}}
             <br/>(published as {{previousDocStatus}}{{#if previousPublishHumanDate}} on {{previousPublishHumanDate}}{{/if}})
+          {{/if}}
+          {{else}}
+          N/A
           {{/if}}
         </dd>
       {{/if}}
