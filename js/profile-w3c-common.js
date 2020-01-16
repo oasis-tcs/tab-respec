@@ -5,18 +5,14 @@ var requireConfig = {
     shim:   {
         "shortcut": {
             exports:    "shortcut"
-        },
-        "n3-browser.min": {
-        	exports: "N3"
         }
     }
 };
-//if ("respecVersion" in window && respecVersion) {
-//    requireConfig.paths = {
-//        "ui": "https://raw.github.com/darobin/respec/gh-pages/js/ui",
-//    };
-//}
-
+if ("respecVersion" in window && respecVersion) {
+    requireConfig.paths = {
+        "ui":   "https://w3c.github.io/respec/js/ui"
+    };
+}
 require.config(requireConfig);
 
 define([
@@ -27,57 +23,41 @@ define([
         ,   "core/default-root-attr"
         ,   "core/markdown"
         ,   "core/style"
-        ,   "oasis/style"
-        ,   "oasis/headers"
-/*      ,   "oasis/abstract" */
-        ,   "oasis/conventions"
-        ,   "oasis/conformance"
+        ,   "w3c/style"
+        ,   "w3c/headers"
+        ,   "w3c/abstract"
+        ,   "w3c/conformance"
         ,   "core/data-transform"
         ,   "core/data-include"
         ,   "core/inlines"
+        ,   "w3c/rfc2119"
         ,   "core/examples"
         ,   "core/issues-notes"
         ,   "core/requirements"
         ,   "core/highlight"
         ,   "core/best-practices"
         ,   "core/figures"
-        ,   "oasis/biblio"
+        ,   "core/biblio"
         ,   "core/rdfa"
         ,   "core/webidl-oldschool"
         ,   "core/dfn"
         ,   "core/fix-headers"
-        ,   "oasis/structure"
-        ,   "oasis/informative"
+        ,   "core/structure"
+        ,   "w3c/informative"
+        ,   "w3c/permalinks"
         ,   "core/id-headers"
-        ,   "oasis/conformance-table"
-        ,   "oasis/aria"
-        ,   "oasis/vocab"
-        ,   "oasis/shape"
+        ,   "w3c/aria"
         ,   "core/shiv"
         ,   "core/remove-respec"
         ,   "core/location-hash"
-        ,   "ui/about-respec"
-        ,   "ui/save-html"
-        ,   "ui/search-specref"
         ],
         function (domReady, runner, ui) {
             var args = Array.prototype.slice.call(arguments);
             domReady(function () {
                 ui.addCommand("Save Snapshot", "ui/save-html", "Ctrl+Shift+Alt+S");
                 ui.addCommand("About ReSpec", "ui/about-respec", "Ctrl+Shift+Alt+A");
+                ui.addCommand("Search Specref DB", "ui/search-specref", "Ctrl+Shift+Alt+space");
                 runner.runAll(args);
             });
         }
 );
-
-function vocabToSpec(util, content, uri) {
-	var vocab = require("oasis/vocab");
-	return vocab.vocabToSpec(util, content, uri);
-}
-
-function shapeToSpec(util, content, uri) {
-	var shape = require("oasis/shape");
-	return shape.shapeToSpec(util, content, uri);
-}
-
-

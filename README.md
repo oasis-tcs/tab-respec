@@ -1,31 +1,127 @@
-<div>
-<h2>README</h2>
+ReSpec
+======
 
-<p>Members of the <a href="https://www.oasis-open.org/committees/tab/">Technical Advisory Board (TAB)</a>, in concert with members of the <a href="https://www.oasis-open.org/committees/oslc-domains/">OASIS OSLC Lifecycle Integration for Domains (OSLC Domains) Technical Committee</a>, create and manage technical content in this TC GitHub repository ( <a href="https://github.com/oasis-tcs/tab-respec">https://github.com/oasis-tcs/tab-respec</a>) as part of the TAB's chartered work (<i>i.e.</i>, the program of work and deliverables described in its <a href="https://www.oasis-open.org/committees/tab/charter.php">charter</a>).</p>
+ReSpec is a JS library that makes it easier to write technical specifications, or documents
+that tend to be technical in nature in general. It was originally designed for the purpose
+of writing W3C specifications, but this fork is maintained purely for OASIS specifications.
+For more information on the history of ReSpec, see the README.md of the W3C variant.
 
-<p>OASIS TC GitHub repositories, as described in <a href="https://www.oasis-open.org/resources/tcadmin/github-repositories-for-oasis-tc-members-chartered-work">GitHub Repositories for OASIS TC Members' Chartered Work</a>, are governed by the OASIS <a href="https://www.oasis-open.org/policies-guidelines/tc-process">TC Process</a>, <a href="https://www.oasis-open.org/policies-guidelines/ipr">IPR Policy</a>, and other policies, similar to TC Wikis, TC JIRA issues tracking instances, TC SVN/Subversion repositories, etc.  While they make use of public GitHub repositories, these TC GitHub repositories are distinct from <a href="https://www.oasis-open.org/resources/open-repositories">OASIS TC Open Repositories</a>, which are used for development of open source <a href="https://www.oasis-open.org/resources/open-repositories/licenses">licensed</a> content.</p>
-</div>
+Important Note
+==============
 
-<div>
-<h3>Description</h3>
+ReSpec is not endorsed by W3C or OASIS, and nobody should expect the W3C Webmaster or OASIS TC Administrator
+to provide advice on problems encountered with ReSpec,
+or on why it may be failing to produce compliant content.
 
-<p>The purpose of this repository is to support development and maintenance of extensions to the ReSpec application to enable it to produce OASIS-styled specifications. The original work was done by Nicholas Crossley of the OSLC Core TC.</p> 
+Want to change a bibliographical reference?
+===========================================
 
-<p>The TAB itself is not formally an OASIS Technical Committee, but a working group chartered by the OASIS Board to provide technical assistance to OASIS. The TAB supports this work as part of its mission to improve the standards development process and the quality of OASIS Standards.</p>
-</div>
+Bibliographical references have been moved out of ReSpec. You want to use this:
+https://github.com/tobie/specref
 
-<div>
-<h3>Contributions</h3>
-<p>As stated in this repository's <a href="https://github.com/oasis-tcs/tab-respec/blob/master/CONTRIBUTING.md">CONTRIBUTING file</a>, contributors to this repository are expected to be Members of the OASIS OSLC Lifecycle Integration for Domains (OSLC Domains) TC or of the TAB, for any substantive change requests.  Anyone wishing to contribute to this GitHub project and <a href="https://www.oasis-open.org/join/participation-instructions">participate</a> in the TC's technical activity is invited to join as an OASIS TC Member.  Public feedback is also accepted, subject to the terms of the <a href="https://www.oasis-open.org/policies-guidelines/ipr#appendixa">OASIS Feedback License</a>.</p>
-</div>
+Want to see complete documentation?
+===================================
 
-<div>
-<h3>Licensing</h3>
-<p>Please see the <a href="https://github.com/oasis-tcs/tab-respec/blob/master/LICENSE.md">LICENSE</a> file for description of the license terms and OASIS policies applicable to the TC's work in this GitHub project. Content in this repository is intended to be part of the TAB's and the OSLC Domains TC's permanent record of activity, visible and freely available for all to use, subject to applicable OASIS policies, as presented in the repository <a href="https://github.com/oasis-tcs/tab-respec/blob/master/LICENSE.md">LICENSE</a> file.</p>
-</div>
+Thorough documentation for the W3C variant of ReSpec
+can be found at http://www.w3.org/respec, with a github repository
+for the sources at https://github.com/w3c/respec-docs.
+That documentation is not accurate for this OASIS fork, but it is as close as we have right now!
+
+How to contribute?
+==================
+
+It is common for people to contribute to RS, notably to make changes to the biblio references. You
+certainly are welcome to submit whatever change you wish to (though if it's a complex feature please
+try to coordinate with others first to avoid working long on something that will then be rejected).
+
+If you're familiar with GitHub then contributing is simple: just fork and make pull requests. Please
+just be careful to note that the primary branch is `gh-pages` and not `master` (this ensures that
+the result gets published on the Web). **More importantly**, please note that the development branch
+is `feature/oasis-style`. If you are making patches and pull requests, please base them off this branch.
+
+If you're not familiar with GitHub, you need to follow the following steps:
+
+* Get a GitHub account. This is done quickly, and the GH people will not bother you at all. Plus,
+  it's pretty much a requirement for the majority of OSS communities these days.
+* If all you want to make is a small, simple change, you can use the Web interface. Navigate to the
+  file that you want to change, click "Edit this file" in the toolbar, then save your changes - they
+  will get sent to the project for approval (which ought to be quick).
+* If you wish to make more complex changes, you will need to fork the project (click "Fork"), clone
+  the resulting repository, make the changes there, and push it back. Then click the "Pull Request"
+  button. This allows you to request that the project integrate your changes. Those should normally
+  get processed relatively fast (depending on how complex they are).
+
+Running the test suite
+----------------------
+
+_Note: this section is not applicable to the OASIS variant yet._
+
+Respec runs a number of high level, end-to-end tests using [Jasmine][jasmine]. These tests are
+run by [Travis][travis], a hosted continuous integration solution, on each pull requests.
+
+There are two options to run these tests locally: in a browser or using [PhantomJS][phantomjs].
+
+### Running the test suite in a browser
+
+Tests need to be served from the root of the repository to function properly. Any server will do,
+but here's an example using Python's `SimpleHTTPServer`:
+
+```
+$ cd /path/to/repo/
+$ python -m SimpleHTTPServer
+Serving HTTP on 0.0.0.0 port 8000 ...
+```
+
+Navigating to `http://localhost:8000/tests/SpecRunner.html` with any recent browser will launch the
+test suite.
+
+### Running the test suite in PhantomJS
+
+[PhantomJS][phantomjs] is a headless, WebKit-based browser. It allows running the tests directly
+from the command line.
+
+In order to run the test from the command line, you need to [install Node][install-node], [npm][npm]
+and [PhantomJS][install-phjs]. _Note that npm comes bundled with recent versions of Node._
+
+Once these dependencies are installed, running the test suite should be as simple as:
+
+```
+$ npm test
+```
 
 
-<div>
-<h3>Contact</h3>
-<p>Please send questions or comments about <a href="https://www.oasis-open.org/resources/tcadmin/github-repositories-for-oasis-tc-members-chartered-work">OASIS TC GitHub repositories</a> to the <a href="mailto:tc-admin@oasis-open.org">OASIS Technical Committee Administrator</a>.  For questions about content in this repository, please contact the TC Chair or Co-Chairs as listed on the the OSLC Domains TC's <a href="https://www.oasis-open.org/committees/oslc-domains/">home page</a>.</p>
-</div>
+[jasmine]: http://pivotal.github.io/jasmine/
+[travis]: https://travis-ci.org/w3c/respec
+[phantomjs]: http://phantomjs.org/
+[install-phjs]: http://phantomjs.org/download.html
+[install-node]: http://nodejs.org/download/
+[npm]: https://npmjs.org/
+
+## Building ReSpec
+
+Whenever you run the test suite a new build is made for you. You can run `tools/test-build.js` to
+obtain the same result.
+
+## Releasing ReSpec
+
+### OASIS Profile
+
+Normally, only @ndjc makes releases. But in the eventuality that he is not available, others
+can follow this process:
+
+1. Make sure you are up to date and on the 'feature/oasis-style' branch (git up; git checkout feature/oasis-style)
+2. Go to 'tools/oasis'
+3. Bump the version in `package-oasis.json`.
+4. Run the build script (node build-oasis-common.js). This should respond "OK!" (if not, fix the
+   issue).
+5. Add the new build (git add builds/oasis/respec-oasis-common-m.n.r.js).
+6. Commit your changes (git commit)
+7. Merge to gh-pages (git checkout gh-pages; git merge feature/oasis-style)
+8. (when needed) Tag the release (git tag v3.x.y) and be sure that git is pushing tags.
+9. Push everything back to the server (make sure you are pushing at least the `feature/oasis-style` and
+   `gh-pages` branches).
+
+The simplest way of doing this, is to just run `tools/oasis/release.js`. This will prompt you a few times
+with the above process.
+
+This hasn't been adopted by OASIS, this work is in progress.

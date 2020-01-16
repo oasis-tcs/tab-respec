@@ -1,0 +1,92 @@
+{{#if isUnofficial}}
+  <p>
+    This document is merely a public working draft of a potential committee specification. It has
+    no official standing of any kind and does not represent the support or consensus of any
+    standards organization.
+  </p>
+  {{{sotdCustomParagraph}}}
+{{else}}
+  {{#if isNoTrack}}
+    <p>
+      This document is merely a OASIS-internal {{#if isMO}}member-confidential{{/if}} document. It
+      has no official standing of any kind and does not represent consensus of the OASIS
+      Membership.
+    </p>
+    {{{sotdCustomParagraph}}}
+  {{else}}
+      This document was last revised or approved by the {{{wgHTML}}} on the above date.
+      The level of approval is also listed above.
+      Check the “Latest version” location noted above for possible later revisions of this document.
+      Any other numbered Versions and other technical work produced by the Technical Committee (TC) are listed at
+      <a href='{{tcBaseURI}}/tc_home.php?wg_abbrev={{wgShortName}}#technical'>
+      {{tcBaseURI}}/tc_home.php?wg_abbrev={{wgShortName}}#technical</a>.
+    <p>
+      TC members should send comments on this specification to the TC’s email list.
+      Others should send comments to the TC’s public comment list
+      <a href='{{tcBaseURI}}/comments/index.php?wg_abbrev={{wgShortName}}'>{{wgPublicList}}@lists.oasis-open.org</a>,
+      after subscribing to it by following the instructions at the “Send A Comment” button on the TC’s web page at
+      <a href='{{tcBaseURI}}/{{wgShortName}}/'>{{tcBaseURI}}/{{wgShortName}}/</a>.
+    </p>
+    <p>
+      This specification is being provided under the <a href="https://www.oasis-open.org/policies-guidelines/ipr#RF-on-Limited-Mode">RF on Limited Terms</a> Mode of the <a href="https://www.oasis-open.org/policies-guidelines/ipr">OASIS IPR Policy</a>, the mode chosen when the Technical Committee was established. For information on whether any patents have been disclosed that may be essential to implementing this specification,
+      and any offers of patent licensing terms, please refer to the Intellectual Property Rights section of the TC’s web page
+      (<a href='{{tcBaseURI}}/{{wgShortName}}/ipr.php'>{{tcBaseURI}}/{{wgShortName}}/ipr.php</a>).
+    </p>
+    {{#if addPatentNote}}<p>{{{addPatentNote}}}</p>{{/if}}
+    <p>
+      Note that any machine-readable content (<a href="https://www.oasis-open.org/policies-guidelines/tc-process#wpComponentsCompLang">Computer Language Definitions</a>) declared Normative for this Work Product is provided in separate plain text files. In the event of a discrepancy between any such plain text file and display content in the Work Product's prose narrative document(s), the content in the separate plain text file prevails.
+    </p>
+    {{{sotdCustomParagraph}}}
+    {{#if implementationReportURI}}
+      <p>
+        Please see the Technical Committee's <a href='{{implementationReportURI}}'>implementation report</a>.
+      </p>
+    {{/if}}
+    {{#if notRec}}
+      <p>
+        Publication as {{anOrA}} {{textStatus}} does not imply endorsement by the OASIS Membership.
+        This is a draft document and may be updated, replaced or obsoleted by other documents at any time.
+        It is inappropriate to cite this document as other than work in progress.
+      </p>
+    {{/if}}
+    {{#if isLC}}
+      <p>
+        This is a Last Call Working Draft and thus the Technical Committee has determined that this
+        document has satisfied the relevant technical requirements and is sufficiently stable to
+        advance through the Technical Recommendation process.
+      </p>
+    {{/if}}
+  {{/if}}
+{{/if}}
+{{#if neverDefined}}
+       <p>
+         This document was published by the {{{wgHTML}}} as {{anOrA}} {{longStatus}}.
+         {{#if notYetRec}}
+           This document is intended to become an OASIS Standard.
+         {{/if}}
+         {{#unless isPR}}
+           If you wish to make comments regarding this document, please send them to
+           <a href='{{tcBaseURI}}/comments/index.php?wg_abbrev={{wgShortName}}'>{{wgPublicList}}@lists.oasis-open.org</a>
+           (<a href='mailto:{{wgPublicList}}-subscribe@lists.oasis-open.org?subject=subscribe'>subscribe</a>,
+           <a href='https://lists.oasis-open.org/archives/{{wgPublicList}}/'>archives</a>){{#if subjectPrefix}}
+           with <code>{{subjectPrefix}}</code> at the start of your email's subject{{/if}}.
+         {{/unless}}
+         {{#if isLC}}The Last Call period ends {{humanLCEnd}}.{{/if}}
+         {{#if isCR}}
+           OASIS publishes a Committee Specification Public Review Draft to indicate that the document is believed to be
+           stable and to encourage implementation by the developer community. This Committee Specification
+           Public Review Draft is expected to advance to Committee Specification no earlier than
+           {{humanCREnd}}.
+         {{/if}}
+         {{#if isPR}}
+             The OASIS Membership and other interested parties are invited to review the document and
+             send comments to
+             <a rel='discussion' href='{{tcBaseURI}}/comments/index.php?wg_abbrev={{wgShortName}}'>{{wgPublicList}}@lists.oasis-open.org</a>
+             (<a href='mailto:{{wgPublicList}}-subscribe@lists.oasis-open.org?subject=subscribe'>subscribe</a>,
+             <a href='https://lists.oasis-open.org/archives/{{wgPublicList}}/'>archives</a>)
+             through {{humanPREnd}}.
+         {{else}}
+           All comments are welcome.
+         {{/if}}
+       </p>
+{{/if}}

@@ -1,0 +1,25 @@
+{
+    "name": "respec",
+    "version": "1.0.1",
+    "description": "Specification Edition Support Tool (OASIS Profile).",
+    "main": "index.js",
+    "directories": {
+        "doc": "docs",
+        "example": "examples",
+        "test": "tests"
+    },
+    "scripts": {
+        "test": "node ./tests/headless.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/ndjc/respec.git"
+    },
+    "author": "Robin Berjon, Steve Speicher, Nick Crossley",
+    "devDependencies": {
+        "async": "^2.6.1",
+        "express": "^4.16.3",
+        "prompt": "^1.0.0",
+        "requirejs": "^2.3.5"
+    }
+}
