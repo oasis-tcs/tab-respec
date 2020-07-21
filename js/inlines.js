@@ -64,9 +64,15 @@ define(
                                 // remember which ones were used
                                 if (conf.respecRFC2119[matched]) {
                                     conf.respecRFC2119[matched]++;
-                                } 
+                                }
                                 else {
                                     conf.respecRFC2119[matched] = 1;
+                                }
+                                if ($(txt).closest('.conformance').length === 0
+                                    && $(txt).closest('.noconformance').length === 0
+                                    && $(txt).closest('section').attr('id') !== "conventions"
+                                    && $(txt).closest('section').attr('id') !== "conformance") {
+                                  msg.pub("warn","RFC 2119 word not in conformance clause ('"+$(txt).parent().text()+"')");
                                 }
                             }
                             // BIBREF
