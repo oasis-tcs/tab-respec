@@ -177,7 +177,12 @@ define(
                 conf.title = N3.Util.getLiteralValue(title[0].object);
 
                 var desc = store.find(shapeSubject, dcDescription, null);
-                if (desc.length > 0) conf.description = N3.Util.getLiteralValue(desc[0].object);
+                if (desc.length > 0) {
+                  var dtext = N3.Util.getLiteralValue(desc[0].object);
+                  dtext = dtext.replace(/{{/g, "<span class='conformance'>").replace(/}}/g, "</span>");
+                  dtext = dtext.replace(/`([^`]+)`/g, "<code>$1</code>");
+                  conf.description = dtext;
+                }
 
                 var props = store.find(shapeSubject, oslcProp, null);
                 conf.props = props;
@@ -212,6 +217,10 @@ define(
                         it.prefixedName = getPrefixedName(it.propURI);
                     if (oslcLitTypes[it.valType])
                         it.rep = "N/A";
+                    if (it.description) {
+                      it.description = it.description.replace(/{{/g, "<span class='conformance'>").replace(/}}/g, "</span>");
+                      it.description = it.description.replace(/`([^`]+)`/g, "<code>$1</code>");
+                    }
                 });
                 props.sort(function(a, b) { return a.prefixedName.localeCompare(b.prefixedName); });
 
