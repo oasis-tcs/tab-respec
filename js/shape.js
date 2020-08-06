@@ -172,6 +172,10 @@ define(
                    conf.typeURI = typeURI[0].object;
                    conf.name = /[#/][^#/]*$/.exec(conf.typeURI)[0].substring(1);
                 }
+                else
+                {
+                    conf.name = conf.typeURI = "Common Properties";
+                }
 
                 var title = store.find(shapeSubject, dcTitle, null);
                 conf.title = N3.Util.getLiteralValue(title[0].object);
