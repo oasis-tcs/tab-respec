@@ -34,6 +34,11 @@ define(
                     return prefixedName;
                 };
 
+                var miniMD = function(str) {
+                  return str.replace(/{{/g, "<span class='conformance'>").replace(/}}/g, "</span>")
+                     .replace(/`([^`]+)`/g, "<code>$1</code>");
+                };
+
                 var setDefaults = function(prop) {
                     var propDefaults = {
                         occurs:   {long: "http://open-services.net/ns/core#Zero-or-many", short: "Zero-or-many"},
@@ -178,14 +183,11 @@ define(
                 }
 
                 var title = store.find(shapeSubject, dcTitle, null);
-                conf.title = N3.Util.getLiteralValue(title[0].object);
+                conf.title = miniMD(N3.Util.getLiteralValue(title[0].object));
 
                 var desc = store.find(shapeSubject, dcDescription, null);
                 if (desc.length > 0) {
-                  var dtext = N3.Util.getLiteralValue(desc[0].object);
-                  dtext = dtext.replace(/{{/g, "<span class='conformance'>").replace(/}}/g, "</span>");
-                  dtext = dtext.replace(/`([^`]+)`/g, "<code>$1</code>");
-                  conf.description = dtext;
+                  conf.description = miniMD(N3.Util.getLiteralValue(desc[0].object));
                 }
 
                 var props = store.find(shapeSubject, oslcProp, null);
@@ -222,8 +224,7 @@ define(
                     if (oslcLitTypes[it.valType])
                         it.rep = "N/A";
                     if (it.description) {
-                      it.description = it.description.replace(/{{/g, "<span class='conformance'>").replace(/}}/g, "</span>");
-                      it.description = it.description.replace(/`([^`]+)`/g, "<code>$1</code>");
+                      it.description = miniMD(it.description);
                     }
                 });
                 props.sort(function(a, b) { return a.prefixedName.localeCompare(b.prefixedName); });
