@@ -8952,7 +8952,7 @@ define(
                             var r = /#.*$/.exec(o);
                             if (r && r.length > 0) o = r[0].substring(1);
                         }
-                    return o
+                    return o;
                     }
 
                     $.each(triples || [], function(i, it) {
