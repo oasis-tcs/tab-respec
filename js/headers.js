@@ -249,7 +249,7 @@ define(
                     var shortname = conf.shortName.replace(/^oslc-/, "");
                     conf.thisVersion = "https://www.open-services.net/specifications/"
                         + shortname
-                        + "/"
+                        + "X"
                         + conf.label
                         + "/"
                         + base;
