@@ -7,6 +7,7 @@ var prompt = require("prompt")
 ,   pth = require("path")
 ,   bwc = require("./build-oasis-common")
 ,   exec = require("child_process").exec
+,   execSync = require("child_process").execSync
 ,   rfs = function (f) { return fs.readFileSync(f, { encoding: "utf8" }); }
 ,   wfs = function (f, data) { return fs.writeFileSync(f, data, { encoding: "utf8" }); }
 ,   rel = function (f) { return pth.join(__dirname, f); }
@@ -15,11 +16,12 @@ var prompt = require("prompt")
 
 prompt.start();
 
-// 1. Make sure you are up to date and on the master branch (git up; git checkout master)
+// 1. Make sure you are up to date and on the right branch (git up; git checkout b-issue-rsXXX)
 function upToDateAndDev (cb) {
+    execSync("git status",{stdio: 'inherit'});
     prompt.get(
         {
-            description:    "Are you up to date and on the master branch?"
+            description:    "Are you up to date and on the right branch?"
         ,   pattern:        /^[yn]$/i
         ,   message:        "Values can be 'y' or 'n'."
         ,   default:        "y"
@@ -27,13 +29,13 @@ function upToDateAndDev (cb) {
     ,   function (err, res) {
             var val = res.question.toLowerCase();
             if (err) return cb(err);
-            if (val === "n") return cb("Make sure to run git up; git checkout master");
+            if (val === "n") return cb("Make sure to run git up; git checkout b-issue-rsXXX");
             cb();
         }
     );
 }
 
-// 2. Bump the version in `package-oasis.json`.
+// 2. Bump the version in `package-oasis.json`, if wanted
 function bumpVersion (cb) {
     var pack = rfs(rel("./package-oasis.json"))
     ,   version = pack.match(/"version"\s*:\s*"([\d\.]+)"/)[1]
@@ -66,8 +68,8 @@ function bumpVersion (cb) {
 // 3. Run the build script (node tools/build-oasis-common.js). This should respond "OK!" (if not, fix the
 //    issue).
 // 4. Add the new build (git add builds/respec-oasis-common-3.x.y.js).
-// 5. Commit your changes (git commit -am v0.0.9)
-// 7. Tag the release (git tag v3.x.y) and be sure that git is pushing tags.
+// 5. Commit your changes (git commit -am vX.Y.Z)
+// 7. Tag the release (git tag vX.Y.Z) and be sure that git is pushing tags.
 function buildAddCommitTag (cb) {
     prompt.get(
         {
