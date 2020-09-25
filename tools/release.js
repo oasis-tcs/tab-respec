@@ -7,6 +7,7 @@ var prompt = require("prompt")
 ,   pth = require("path")
 ,   bwc = require("./build-oasis-common")
 ,   exec = require("child_process").exec
+,   execSync = require("child_process").execSync
 ,   rfs = function (f) { return fs.readFileSync(f, { encoding: "utf8" }); }
 ,   wfs = function (f, data) { return fs.writeFileSync(f, data, { encoding: "utf8" }); }
 ,   rel = function (f) { return pth.join(__dirname, f); }
@@ -17,7 +18,7 @@ prompt.start();
 
 // 1. Make sure you are up to date and on the right branch (git up; git checkout b-issue-rsXXX)
 function upToDateAndDev (cb) {
-    exec("git status");
+    execSync("git status",{stdio: 'inherit'});
     prompt.get(
         {
             description:    "Are you up to date and on the right branch?"
