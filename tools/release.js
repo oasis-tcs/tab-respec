@@ -17,7 +17,7 @@ prompt.start();
 
 // 1. Make sure you are up to date and on the right branch (git up; git checkout b-issue-rsXXX)
 function upToDateAndDev (cb) {
-    exec("git status", cb);
+    exec("git status");
     prompt.get(
         {
             description:    "Are you up to date and on the right branch?"
