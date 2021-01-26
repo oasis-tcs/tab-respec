@@ -7,6 +7,8 @@
 define(
     [],
     function () {
+        var specRef = "https://specref.herokuapp.com/bibrefs?refs="; // was "https://api.specref.org/bibrefs?refs="
+
         var getRefKeys = function (conf) {
             var informs = conf.informativeReferences
             ,   norms = conf.normativeReferences
@@ -162,7 +164,7 @@ define(
                                 .concat(refs.informativeReferences)
                                 .concat(localAliases);
                 if (refs.length) {
-                    var url = "https://api.specref.org/bibrefs?refs=" + refs.join(",");
+                    var url = specRef + refs.join(",");
                     $.ajax({
                         dataType:   "json"
                     ,   url:        url
