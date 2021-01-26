@@ -4213,7 +4213,7 @@ define(
 );
 
 
-define('tmpl!templates/conventions.html', ['handlebars'], function (hb) { return Handlebars.compile('<h2>Typographical Conventions and Use of RFC Terms</h2>\n<p>\n  As well as sections marked as non-normative, all authoring guidelines, diagrams, examples,\n  and notes in this specification are non-normative. Everything else in this specification is\n  normative.\n</p>\n<p>\n  The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",\n  "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL"\n  in this specification are to be interpreted as described in [[!BCP14]] [[!RFC2119]] [[!RFC8174]]\n  when, and only when, they appear in all capitals, as shown here.\n</p>\n');});
+define('tmpl!templates/conventions.html', ['handlebars'], function (hb) { return Handlebars.compile('<h2>Typographical Conventions and Use of RFC Terms</h2>\n<p>\n  As well as sections marked as non-normative, all authoring guidelines, diagrams, examples,\n  and notes in this specification are non-normative. Everything else in this specification is\n  normative.\n</p>\n<p>\n  The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",\n  "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL"\n  in this specification are to be interpreted as described in\n  <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>\n  [[!RFC2119]] [[!RFC8174]]\n  when, and only when, they appear in all capitals, as shown here.\n</p>\n');});
 
 
 // Module conventions
