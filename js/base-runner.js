@@ -65,6 +65,9 @@ if (window.console) {
     });
     respecEvents.sub("end-all", function () {
         console.log("RESPEC DONE!");
+        document
+          .getElementById(window.location.hash.substring(1))
+          .scrollIntoView();
     });
 }
 
