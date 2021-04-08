@@ -9490,24 +9490,24 @@ define(
             }
             return { html: html, count: count };
         }
-        
+
         function msg(query, count) {
             if (count) {
                 return 'We found ' + pluralize(count, 'result', 'results') + ' for your search for "' + query + '".';
             }
             return 'Your search for "' + query + '" did not match any references in the Specref database.<br>Sorry. :\'(';
         }
-        
+
         return {
             show: function (ui) {
                 var $halp = $("<div><form><p><input name=q type=search> <input type=submit value=search /></p></form></div");
                 var $search = $halp.find("input[type=search]");
                 var $status = $("<p style='font-size: smaller'></p>");
                 var $results = $("<dl></dl>");
-                
+
                 $status.appendTo($halp);
                 $results.appendTo($halp);
-                
+
                 ui.freshModal("Search Specref DB", $halp);
                 $search.focus();
                 $halp.find("form").on("submit", function() {
