@@ -59,7 +59,14 @@ define(
             }
             if (ref.href) output += '<a href="' + ref.href + '"><cite>' + ref.title + "</cite></a>. ";
             else output += '<cite>' + ref.title + '</cite>. ';
-            if (ref.date) output += ref.date + ". ";
+            if (ref.date)  {
+                if (ref.publisher) output += ref.publisher + ", ";
+                output += ref.date + ". ";
+            } else if (ref.year) {
+                if (ref.publisher) output += ref.publisher + ", ";
+                output += ref.year + ". ";
+            }
+            else if (ref.publisher) output += ref.publisher + ". ";
             if (ref.status) output += (REF_STATUSES[ref.status] || ref.status) + ". ";
             if (ref.href) output += 'URL: <a href="' + ref.href + '">' + ref.href + "</a>";
             return output;
