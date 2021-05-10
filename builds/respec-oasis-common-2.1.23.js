@@ -1,9 +1,9 @@
-/* ReSpec 2.1.24 - Robin Berjon, http://berjon.com/ (@robinberjon)
+/* ReSpec 2.1.23 - Robin Berjon, http://berjon.com/ (@robinberjon)
  - Steve Speicher, http://stevespeicher.me/ (@sspeiche)
  - Nick Crossley (@ndjc) */
 /* Documentation: http://w3.org/respec/. */
 /* See original source for licenses: https://github.com/oasis-tcs/tab-respec. */
-respecVersion = '2.1.24';
+respecVersion = '2.1.23';
 /*
  RequireJS 2.1.8 Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.
  Available via the MIT or new BSD license.
@@ -9107,7 +9107,7 @@ define(
                                 {predicate: oslcRep, name: "rep"},
                                 {predicate: oslcRange, name: "range", multiValue: true, getPrefixedName: true},
                                 {predicate: oslcPropDefn, name: "propURI", dontCompact: true},
-                                {predicate: dcDescription, name: "description", dontCompact: true},
+                                {predicate: dcDescription, name: "description"},
                                 {predicate: oslcName, name: "name"}];
 
                 // Map from object values to text/label entries for the spec tables

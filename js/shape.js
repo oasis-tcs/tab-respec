@@ -209,7 +209,7 @@ define(
                                 {predicate: oslcRep, name: "rep"},
                                 {predicate: oslcRange, name: "range", multiValue: true, getPrefixedName: true},
                                 {predicate: oslcPropDefn, name: "propURI", dontCompact: true},
-                                {predicate: dcDescription, name: "description"},
+                                {predicate: dcDescription, name: "description", dontCompact: true},
                                 {predicate: oslcName, name: "name"}];
 
                 // Map from object values to text/label entries for the spec tables
