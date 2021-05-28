@@ -131,7 +131,6 @@ define(
                 WD:             "WD"
             ,   PSD:            "PSD"
             ,   PS:             "PS"
-            ,   COS:            "COS"
             ,   OS:             "OS"
             ,   Errata:         "Errata"
             ,   PND:            "PND"
@@ -141,7 +140,6 @@ define(
                 WD:             "oasis:WD",
                 PSD:            "oasis:PSD",
                 PS:             "oasis:PS",
-                COS:            "oasis:COS",
                 OS:             "oasis:OS",
                 Errata:         "oasis:Errata",
                 PND:            "oasis:PND",
@@ -151,14 +149,13 @@ define(
                     WD:             "Working Draft"
                 ,   PSD:            "Project Specification Draft"
                 ,   PS:             "Project Specification"
-                ,   COS:            "Candidate OASIS Standard"
                 ,   OS:             "OASIS Standard"
                 ,   Errata:         "Approved Errata"
                 ,   PND:            "Project Note Draft"
                 ,   PN:             "Project Note"
                 ,   PRD:            "Public Review Draft"
             }
-        ,   stdTrackStatus: ["WD", "PSD", "PS", "COS", "OS", "Errata"]
+        ,   stdTrackStatus: ["WD", "PSD", "PS", "OS", "Errata"]
         ,   noTrackStatus:  ["PND", "PN"]
         ,   unPublished:    ["WD"]
 
@@ -231,7 +228,7 @@ define(
                 conf.isWD = (conf.specStatus === "WD");
                 conf.isPSD = (conf.specStatus === "PSD");
                 conf.isPS = (conf.specStatus === "PS");
-                conf.isCOS = (conf.specStatus === "COS");
+                conf.isCOS = false; // TODO remove
                 conf.isOS = (conf.specStatus === "OS");
                 conf.isAE = (conf.specStatus === "Errata");
 
@@ -241,7 +238,7 @@ define(
                 conf.notYetStd = (conf.isStdTrack && conf.specStatus !== "OS");
                 conf.isStd = (conf.isStdTrack && conf.specStatus === "OS");
                 conf.notStd = (conf.specStatus !== "OS");
-                conf.prependOASIS = true;
+                conf.prependOASIS = !conf.isStd;
 
                 // Derive specification URIs
                 if (!conf.thisVersion) {
@@ -326,8 +323,12 @@ define(
                         }
                     }
                 }
-                conf.docStatus = conf.textStatus + " " + conf.revision;
 
+                if (!conf.isStd) {
+                conf.docStatus = conf.textStatus + " " + conf.revision;
+                } else {
+                conf.docStatus = conf.textStatus;
+                }
                 if (conf.previousMaturity) {
                    conf.previousDocStatus = this.status2text[conf.previousMaturity];
                    if (conf.previousPublishDate) {
