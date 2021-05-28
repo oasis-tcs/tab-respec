@@ -4060,7 +4060,6 @@ define(
                 conf.isWD = (conf.specStatus === "WD");
                 conf.isPSD = (conf.specStatus === "PSD");
                 conf.isPS = (conf.specStatus === "PS");
-                conf.isCOS = false; // TODO remove
                 conf.isOS = (conf.specStatus === "OS");
                 conf.isAE = (conf.specStatus === "Errata");
 
@@ -4070,7 +4069,7 @@ define(
                 conf.notYetStd = (conf.isStdTrack && conf.specStatus !== "OS");
                 conf.isStd = (conf.isStdTrack && conf.specStatus === "OS");
                 conf.notStd = (conf.specStatus !== "OS");
-                conf.prependOASIS = !conf.isStd;
+                conf.prependOASIS = true; //always show logo
 
                 // Derive specification URIs
                 if (!conf.thisVersion) {
@@ -6626,7 +6625,6 @@ define(
         ,   "WD":       "Working Draft"
         ,   "PSD":      "Project Specification Draft"
         ,   "PS":       "Project Specification"
-        ,   "COS":      "Candidate OASIS Standard"
         ,   "OS":       "OASIS Standard"
         ,   "Errata":   "Approved Errata"
         ,   "PND":      "Project Note Draft"
