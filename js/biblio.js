@@ -42,7 +42,6 @@ define(
         ,   "WD":       "Working Draft"
         ,   "PSD":      "Project Specification Draft"
         ,   "PS":       "Project Specification"
-        ,   "COS":      "Candidate OASIS Standard"
         ,   "OS":       "OASIS Standard"
         ,   "Errata":   "Approved Errata"
         ,   "PND":      "Project Note Draft"
