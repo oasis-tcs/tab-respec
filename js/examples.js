@@ -19,7 +19,7 @@ define(
             }
             return $tit;
         };
-        
+
         return {
             run:    function (conf, doc, cb, msg) {
                 msg.pub("start", "examples");
@@ -27,7 +27,7 @@ define(
                 ,   num = 0
                 ;
                 if ($exes.length) {
-                    $(doc).find("head link").first().before($("<style/>").text(css));
+                    $("<style/>").appendTo($("head", $(doc))).text(css);
                     $exes.each(function (i, ex) {
                         var $ex = $(ex)
                         ,   report = { number: num, illegal: $ex.hasClass("illegal-example") }
