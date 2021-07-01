@@ -3729,7 +3729,7 @@ define(
 
             // takes a YYYY-MM-DD date and returns a Date object for it
         ,   parseSimpleDate:    function (str) {
-                return new Date(str.substr(0, 4), (str.substr(5, 2) - 1), str.substr(8, 2));
+                return new Date(str);
             }
 
             // takes what document.lastModified returns and produces a Date object for it
@@ -4146,7 +4146,7 @@ define(
                             conf.publishHumanDate = "";
                         }
                         conf.publishHumanDate = conf.publishHumanDate + utils.humanDate(conf.publishDate);
-                        conf.dashDate = utils.concatDate(conf.publishDate, "-");
+                        conf.dashDate = conf.publishDate.toISOString();
                         conf.publishISODate = utils.isoDate(conf.publishDate) ;
                     } else {
                         if(conf.isStdTrack && !conf.isWD) {
