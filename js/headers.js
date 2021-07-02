@@ -314,7 +314,7 @@ define(
                             conf.publishHumanDate = "";
                         }
                         conf.publishHumanDate = conf.publishHumanDate + utils.humanDate(conf.publishDate);
-                        conf.dashDate = utils.concatDate(conf.publishDate, "-");
+                        conf.dashDate = conf.publishDate.toISOString();
                         conf.publishISODate = utils.isoDate(conf.publishDate) ;
                     } else {
                         if(conf.isStdTrack && !conf.isWD) {
