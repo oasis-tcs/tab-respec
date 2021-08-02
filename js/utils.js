@@ -162,7 +162,7 @@ define(
             // date suitable for use in a W3C specification
         ,   humanDate:  function (date) {
                 if (!(date instanceof Date)) date = this.parseSimpleDate(date);
-                return this.lead0(date.getDate()) + " " + this.humanMonths[date.getMonth()] + " " + date.getFullYear();
+                return this.lead0(date.getUTCDate()) + " " + this.humanMonths[date.getUTCMonth()] + " " + date.getUTCFullYear();
             }
             // given either a Date object or a date in YYYY-MM-DD format, return an ISO formatted
             // date suitable for use in a xsd:datetime item
