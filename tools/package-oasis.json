@@ -1,6 +1,6 @@
 {
   "name": "respec",
-  "version": "2.1.28",
+  "version": "2.1.29",
   "description": "Specification Edition Support Tool (OASIS Profile).",
   "main": "index.js",
   "directories": {
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git://github.com/oasis-tcs/tab-respec"
   },
-  "author": "Robin Berjon, Steve Speicher, Nick Crossley",
+  "author": "Robin Berjon, Steve Speicher, Nick Crossley, Andrew Berezovskyi",
   "devDependencies": {
     "async": "^2.6.1",
     "express": "^4.16.3",
