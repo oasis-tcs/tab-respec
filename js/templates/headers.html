@@ -16,18 +16,18 @@
     {{/if}}
   </h2>
   <dl>
-    {{#unless isNoTrack}}
-      {{#unless isWD}}
+    {{#unless isWD}}
+    <br/>
+    <dt class='loc-heading'>This stage:</dt>
+    <dd>
+      <a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a> (Authoritative)
       <br/>
-      <dt class='loc-heading'>This stage:</dt>
-      <dd>
-        <a class='u-url' href='{{thisVersion}}'>{{thisVersion}}</a> (Authoritative)
-        <br/>
-        {{#if showPDF}}
-        <a class='u-url' href='{{thisPDFVersion}}'>{{thisPDFVersion}}</a>
-        {{/if}}
-      </dd>
-      {{/unless}}
+      {{#if showPDF}}
+      <a class='u-url' href='{{thisPDFVersion}}'>{{thisPDFVersion}}</a>
+      {{/if}}
+    </dd>
+    {{/unless}}
+    {{#unless isNoTrack}}
       {{#if showPreviousVersion}}
         <br/><dt class='loc-heading'>Previous stage:</dt>
         <dd>

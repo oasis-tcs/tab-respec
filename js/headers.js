@@ -307,7 +307,7 @@ define(
                             conf.publishDate = utils.parseSimpleDate(conf.publishDate);
                         }
                         conf.publishYear = conf.publishDate.getFullYear();
-                        if (conf.isWD || conf.isNoTrack) {
+                        if (conf.isWD) {
                             conf.publishHumanDate = "Last modified on ";
                         }
                         else {
