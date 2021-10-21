@@ -1,6 +1,6 @@
 {
   "name": "respec",
-  "version": "2.1.29",
+  "version": "2.1.30",
   "description": "Specification Edition Support Tool (OASIS Profile).",
   "main": "index.js",
   "directories": {
