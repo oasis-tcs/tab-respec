@@ -27,6 +27,7 @@
     <p>All contributions made to this project have been made under the
       <a href='https://www.oasis-open.org/policies-guidelines/open-projects-process#individual-cla-exhibit'>OASIS Contributor License Agreement (CLA)</a>.</p>
     </p>
+    {{#unless isNoTrack}}
     <p>
     For information on whether any patents have been disclosed that may be essential to implementing this specification,
     and any offers of patent licensing terms,
@@ -34,6 +35,7 @@
     <a href="https://github.com/oasis-open-projects/administration/blob/master/IPR_STATEMENTS.md#open-services-for-lifecycle-collaboration-oslc-open-project">
     Open Projects IPR Statements page</a>.
     </p>
+    {{/unless}}
   {{/if}}
      <p>
        This document and translations of it may be copied and furnished to others,
@@ -59,6 +61,7 @@
        THAT THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY OWNERSHIP RIGHTS OR ANY IMPLIED
        WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
      </p>
+     {{#unless isNoTrack}}
      <p>
        OASIS requests that any OASIS Party or any other party that believes it has patent claims
        that would necessarily be infringed by implementations of this OASIS Project Specification
@@ -88,6 +91,7 @@
        OASIS makes no representation that any information or list of intellectual property rights
        will at any time be complete, or that any claims in such list are, in fact, Essential Claims.
      </p>
+     {{/unless}}
     {{#if addPatentNote}}<p>{{{addPatentNote}}}</p>{{/if}}
      <p>
        The name &quot;OASIS&quot; is a trademark of <a href="https://www.oasis-open.org">OASIS</a>,

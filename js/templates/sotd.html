@@ -8,9 +8,19 @@
 {{else}}
   {{#if isNoTrack}}
     <p>
-      This document is merely a project-internal {{#if isMO}}member-confidential{{/if}} document. It
-      has no official standing of any kind and does not represent consensus of the project
-      membership.
+      This is a Non-Standards Track Work Product. The patent provisions of the OASIS IPR Policy do
+      not apply.
+    </p>
+    <p>
+      This document was last revised or approved by the Project Governing Board of the
+      <a href='{{wgURI}}'>{{wg}}</a> on the above date. The level of approval is also listed above.
+      Check the “Latest stage” location noted above for possible later revisions
+      of this document. Any other numbered Versions and other technical work produced by the Open
+      Project are listed at <a href='{{wgURI}}'>{{wgURI}}</a>.
+    </p>
+    <p>
+      Comments on this work can be provided by opening issues in the project repository or by
+      sending email to the project’s public comment list <a href='mailto:{{wgPublicList}}'>{{wgPublicList}}</a>.
     </p>
     {{{sotdCustomParagraph}}}
   {{else}}
@@ -30,7 +40,7 @@
       {{#if isStd}}
         The English version of this specification is the only normative version. Non-normative
         translations may also be available.
-    {{/if}}  
+    {{/if}}
       Note that any machine-readable content
       (<a href="https://www.oasis-open.org/policies-guidelines/tc-process#wpComponentsCompLang">Computer Language Definitions</a>)
       declared Normative for this Work Product is provided in separate plain text files.
