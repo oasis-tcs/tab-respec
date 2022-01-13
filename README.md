@@ -3,7 +3,7 @@
 The purpose of this repository is to support development and maintenance
 of extensions to the ReSpec application to enable it to produce
 OASIS-styled specifications. The original work was done by Nicholas
-Crossley of the OSLC Core TC. 
+Crossley of the OSLC Core TC.
 
 The TAB itself is not formally an OASIS Technical Committee, but a
 working group chartered by the OASIS Board to provide technical
@@ -33,8 +33,7 @@ First, switch your document to use ReSpec from a local development server:
 
 Next, start a dev server to serve this file:
 
-    cd builds/
-    http-server -p 9000 .
+    http-server -p 9000 builds/
 
 Finally, set up an automatic ReSpec build when any of its files are changed:
 
@@ -50,7 +49,7 @@ Members of the [Technical Advisory Board
 members of the [OSLC Open Project](https://open-services.net/about/),
 create and manage technical content in this TC GitHub repository (
 <https://github.com/oasis-tcs/tab-respec>) as part of the TAB\'s
-chartered work (*i.e.*, the program of work and deliverables described
+chartered work (_i.e._, the program of work and deliverables described
 in its
 [charter](https://www.oasis-open.org/committees/tab/charter.php)).
 
@@ -68,7 +67,6 @@ Repositories](https://www.oasis-open.org/resources/open-repositories),
 which are used for development of open source
 [licensed](https://www.oasis-open.org/resources/open-repositories/licenses)
 content.
-
 
 ### Contributions
 
