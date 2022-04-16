@@ -27,23 +27,22 @@
       {{/if}}
     </dd>
     {{/unless}}
-    {{#unless isNoTrack}}
-      {{#if showPreviousVersion}}
-        <br/><dt class='loc-heading'>Previous stage:</dt>
-        <dd>
-          {{#if prevVersion}}
-          <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevVersion}}'>{{prevVersion}}</a> (Authoritative)
-          <br/>
-          <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevPDFVersion}}'>{{prevPDFVersion}}</a>
-          {{#if previousDocStatus}}
-            <br/>(published as {{previousDocStatus}}{{#if previousPublishHumanDate}} on {{previousPublishHumanDate}}{{/if}})
-          {{/if}}
-          {{else}}
-          N/A
-          {{/if}}
-        </dd>
-      {{/if}}
-      {{#if latestVersion}}
+    {{#if showPreviousVersion}}
+      <br/><dt class='loc-heading'>Previous stage:</dt>
+      <dd>
+        {{#if prevVersion}}
+        <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevVersion}}'>{{prevVersion}}</a> (Authoritative)
+        <br/>
+        <a {{#if doRDFa}}rel="dcterms:replaces"{{/if}} href='{{prevPDFVersion}}'>{{prevPDFVersion}}</a>
+        {{#if previousDocStatus}}
+          <br/>(published as {{previousDocStatus}}{{#if previousPublishHumanDate}} on {{previousPublishHumanDate}}{{/if}})
+        {{/if}}
+        {{else}}
+        N/A
+        {{/if}}
+      </dd>
+    {{/if}}
+    {{#if latestVersion}}
       <br/>
       <dt class='loc-heading'>Latest stage:</dt>
       <dd>
@@ -53,14 +52,12 @@
         <a href='{{latestPDFVersion}}'>{{latestPDFVersion}}</a>
         {{/if}}
       </dd>
-
-      {{/if}}
-      {{#if latestSpecVersion}}
-      <br/>
-      <dt class='loc-heading'>Latest version:</dt>
-      <dd><a href='{{latestSpecVersion}}'>{{latestSpecVersion}}</a></dd>
-      {{/if}}
-    {{/unless}}
+    {{/if}}
+    {{#if latestSpecVersion}}
+    <br/>
+    <dt class='loc-heading'>Latest version:</dt>
+    <dd><a href='{{latestSpecVersion}}'>{{latestSpecVersion}}</a></dd>
+    {{/if}}
     {{#if edDraftURI}}
       <br/><dt class='loc-heading'>Latest editor's draft:</dt>
       <dd><a href='{{edDraftURI}}'>{{edDraftURI}}</a></dd>
