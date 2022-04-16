@@ -54,7 +54,8 @@ can follow this process:
 
 1. Make sure you are up to date and on the 'feature/oasis-style' branch (git up; git checkout feature/oasis-style)
 2. Go to 'tools'
-3. Bump the version in `package-oasis.json`.
+1. Run `npm i` to install all dependencies.
+3. Bump the version in `package.json`.
 4. Run the build script (node build-oasis-common.js). This should respond "OK!" (if not, fix the
    issue).
 5. Add the new build (git add builds/respec-oasis-common-m.n.r.js).
@@ -64,7 +65,7 @@ can follow this process:
 9. Push everything back to the server (make sure you are pushing at least the `feature/oasis-style` and
    `gh-pages` branches).
 
-The simplest way of doing this, is to just run `tools/release.js`. This will prompt you a few times
+The simplest way of doing this (except for the `npm i` step), is to just run `tools/release.js`. This will prompt you a few times
 with the above process.
 
 This hasn't been adopted by OASIS, this work is in progress.

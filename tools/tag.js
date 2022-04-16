@@ -30,12 +30,12 @@ function upToDateAndDev (cb) {
     );
 }
 
-// 2. Find the version in `package-oasis.json`.
+// 2. Find the version in `package.json`.
 function setVersion (cb) {
-    var pack = rfs(rel("./package-oasis.json"))
+    var pack = rfs(rel("./package.json"))
     ,   version = pack.match(/"version"\s*:\s*"([\d\.]+)"/)[1]
     ;
-    if (!version) cb("Version string not found in package-oasis.json");
+    if (!version) cb("Version string not found in package.json");
     targetVersion = version;
     cb();
 }

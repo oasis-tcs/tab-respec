@@ -3,7 +3,7 @@
 var fs   = require("fs")
 ,   pth  = require("path")
 ,   r    = require("requirejs")
-,   version = JSON.parse(fs.readFileSync(pth.join(__dirname, "./package-oasis.json"), "utf-8")).version
+,   version = JSON.parse(fs.readFileSync(pth.join(__dirname, "./package.json"), "utf-8")).version
 // ,   builds = pth.join(__dirname, "../builds")
 // ,   versioned = pth.join(builds, "respec-oasis-common-" + version + ".js")
 ;

@@ -35,12 +35,12 @@ function upToDateAndDev (cb) {
     );
 }
 
-// 2. Bump the version in `package-oasis.json`, if wanted
+// 2. Bump the version in `package.json`, if wanted
 function bumpVersion (cb) {
-    var pack = rfs(rel("./package-oasis.json"))
+    var pack = rfs(rel("./package.json"))
     ,   version = pack.match(/"version"\s*:\s*"([\d\.]+)"/)[1]
     ;
-    if (!version) cb("Version string not found in package-oasis.json");
+    if (!version) cb("Version string not found in package.json");
     var newVersion = version.split(".");
     newVersion[2]++;
     newVersion = newVersion.join(".");
@@ -58,7 +58,7 @@ function bumpVersion (cb) {
                targetVersion = version;
             } else {
                pack = pack.replace(/("version"\s*:\s*")[\d\.]+(")/, "$1" + targetVersion + "$2");
-               wfs(rel("./package-oasis.json"), pack);
+               wfs(rel("./package.json"), pack);
             }
             cb();
         }
