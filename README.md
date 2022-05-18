@@ -58,7 +58,7 @@ OASIS TC Members\' Chartered
 Work](https://www.oasis-open.org/resources/tcadmin/github-repositories-for-oasis-tc-members-chartered-work),
 are governed by the OASIS [TC
 Process](https://www.oasis-open.org/policies-guidelines/tc-process),
-[IPR Policy](https://www.oasis-open.org/policies-guidelines/ipr), and
+[IPR Policy](https://www.oasis-open.org/policies-guidelines/ipr/), and
 other policies, similar to TC Wikis, TC JIRA issues tracking instances,
 TC SVN/Subversion repositories, etc. While they make use of public
 GitHub repositories, these TC GitHub repositories are distinct from
@@ -79,7 +79,7 @@ wishing to contribute to this GitHub project and
 in the TC\'s technical activity is invited to join as an Project Member.
 Public feedback is also accepted, subject to the terms of the [OASIS
 Feedback
-License](https://www.oasis-open.org/policies-guidelines/ipr#appendixa).
+License](https://www.oasis-open.org/policies-guidelines/ipr/#appendixa).
 
 ### Licensing
 
