@@ -18,7 +18,7 @@
   "author": "Robin Berjon, Steve Speicher, Nick Crossley, Andrew Berezovskyi",
   "devDependencies": {
     "async": "^2.6.1",
-    "express": "^4.16.3",
+    "express": "^4.19.2",
     "prompt": "^1.0.0",
     "requirejs": "^2.3.5"
   }
