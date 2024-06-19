@@ -1,6 +1,6 @@
 {
   "name": "respec",
-  "version": "2.1.32",
+  "version": "2.1.34",
   "description": "Specification Edition Support Tool (OASIS Profile).",
   "main": "index.js",
   "directories": {
@@ -20,6 +20,6 @@
     "async": "^2.6.1",
     "express": "^4.16.3",
     "prompt": "^1.0.0",
-    "requirejs": "^2.3.5"
+    "requirejs": "^2.3.6"
   }
 }
